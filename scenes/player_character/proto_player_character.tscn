@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://ceqatehl6iug"]
+
+[ext_resource type="Script" uid="uid://c8jgs7n0qqg0u" path="res://scenes/player_character/proto_player_character.gd" id="1_b7373"]
+[ext_resource type="Script" uid="uid://6eoqf1txicuq" path="res://addons/3d_charater_movement_controller/movement_model/move_model.gd" id="1_vldkw"]
+[ext_resource type="PackedScene" uid="uid://cimkqr4l7am4n" path="res://addons/first_person_camera/fp_camera_scene/fp_camera.tscn" id="2_njf6d"]
+[ext_resource type="Script" uid="uid://e0s75pnk6jy8" path="res://addons/3d_charater_movement_controller/movement_state_machine/move_set.gd" id="2_vayym"]
+[ext_resource type="Script" uid="uid://sy43loaffm40" path="res://addons/3d_charater_movement_controller/movement_state_machine/default_move_scripts/idle.gd" id="3_vayym"]
+[ext_resource type="Script" uid="uid://dsm7ex8qv42k0" path="res://addons/3d_charater_movement_controller/movement_state_machine/default_move_scripts/first_person_run.gd" id="3_vldkw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l6047"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_khpwf"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_s6bcf"]
+size = Vector3(0.4, 0.2, 0.3)
+
+[node name="PlayerCharacter" type="CharacterBody3D"]
+script = ExtResource("1_b7373")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_l6047")
+
+[node name="FPCamera" parent="." instance=ExtResource("2_njf6d")]
+
+[node name="View" type="Node3D" parent="."]
+
+[node name="PlaceholderCapsile" type="MeshInstance3D" parent="View"]
+mesh = SubResource("CapsuleMesh_khpwf")
+
+[node name="PlaceholderEyes" type="MeshInstance3D" parent="View"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.530449, 0.444255)
+layers = 2
+mesh = SubResource("BoxMesh_s6bcf")
+
+[node name="MoveModel" type="Node" parent="." node_paths=PackedStringArray("move_set", "character")]
+script = ExtResource("1_vldkw")
+move_set = NodePath("../MoveSet")
+character = NodePath("..")
+metadata/_custom_type_script = "uid://6eoqf1txicuq"
+
+[node name="MoveSet" type="Node" parent="." node_paths=PackedStringArray("model")]
+script = ExtResource("2_vayym")
+model = NodePath("../MoveModel")
+metadata/_custom_type_script = "uid://e0s75pnk6jy8"
+
+[node name="idle" type="Node" parent="MoveSet"]
+script = ExtResource("3_vayym")
+label = "idle"
+animation = "idle"
+db_label = "idle"
+
+[node name="run" type="Node" parent="MoveSet"]
+script = ExtResource("3_vldkw")
+label = "run"
+priority = 2
+tracks_vector = true
+
+[node name="DebugUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MoveLabel" type="Label" parent="DebugUI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

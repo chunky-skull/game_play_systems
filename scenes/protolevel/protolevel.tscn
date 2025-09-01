@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cayr6j3bii25l"]
+
+[ext_resource type="PackedScene" uid="uid://ishwtsd37a54" path="res://scenes/protolevel/level_geometry.tscn" id="1_emow3"]
+[ext_resource type="PackedScene" uid="uid://cixrlbffsyu60" path="res://scenes/protolevel/proto_world.tscn" id="1_kwqq7"]
+[ext_resource type="PackedScene" uid="uid://ceqatehl6iug" path="res://scenes/player_character/proto_player_character.tscn" id="3_2ag2n"]
+
+[node name="Protolevel" type="Node3D"]
+
+[node name="LevelGeometry" parent="." instance=ExtResource("1_emow3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="ProtoWorld" parent="." instance=ExtResource("1_kwqq7")]
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("3_2ag2n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

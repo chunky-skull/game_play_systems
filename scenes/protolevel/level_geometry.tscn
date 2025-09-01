@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://ishwtsd37a54"]
+
+[ext_resource type="Texture2D" uid="uid://bu3xtu2d688sh" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="1_3vymk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_loi8o"]
+albedo_texture = ExtResource("1_3vymk")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_8c8c1"]
+material = SubResource("StandardMaterial3D_loi8o")
+size = Vector3(500, 1, 500)
+
+[node name="LevelGeometry" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_8c8c1")

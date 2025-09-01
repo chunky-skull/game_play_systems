@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cimkqr4l7am4n"]
+
+[ext_resource type="Script" uid="uid://c1spdhtr04wh5" path="res://addons/first_person_camera/fp_camera_controller/fp_camera.gd" id="1_qnwxn"]
+
+[node name="FPCamera" type="Node3D"]
+script = ExtResource("1_qnwxn")
+
+[node name="FPCameraMount" type="Node3D" parent="."]
+
+[node name="YPivot" type="Node3D" parent="FPCameraMount"]
+
+[node name="XPivot" type="Node3D" parent="FPCameraMount/YPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="FPCameraMount/YPivot/XPivot"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+cull_mask = 1048573

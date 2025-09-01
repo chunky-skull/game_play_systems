@@ -1,0 +1,18 @@
+extends CharacterBody3D
+@onready var move_label: Label = $DebugUI/MoveLabel
+@onready var move_model: MoveModel = $MoveModel
+@onready var fp_camera: Node3D = $FPCamera
+@export var debug := false
+
+func _physics_process(delta: float) -> void:
+	#move_model.camera_basis = fp_camera.basis
+	move_label.text = move_model.move_set.current_move.label + " " + str(fp_camera.input.mouse_motion)
+	var input = move_model.inputCollector.collect_inputs()
+	fp_camera.update(delta)
+	pivot(fp_camera.rotation_vector)
+	move_model.move_set.update(input, delta)
+	input.queue_free()
+
+func pivot(rotation_vector : Vector2) -> void:
+	var y_rotation := Vector3(0.0, rotation_vector.y, 0.0)
+	global_transform.basis = Basis.from_euler(y_rotation)

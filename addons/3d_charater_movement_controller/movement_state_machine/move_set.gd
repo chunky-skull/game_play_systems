@@ -1,0 +1,79 @@
+extends Node
+class_name MoveSet
+@onready var current_move : Move
+@export var model : MoveModel
+#@export var corpus : CharacterCorpus
+#@export var moves_repo : MovesRepository
+#@export var base_animator : AnimationPlayer
+#@export var animator : SplitBodyAnimator
+#@export var skeleton : Skeleton3D
+#@export var combat : HumanoidCombat
+#@export var area_awareness : AreaAwareness
+#@export var legs : Legs
+#@export var left_wrist : BoneAttachment3D
+
+var move : Dictionary # { string : Move }, where string is Move heirs name
+
+func accept_moves():
+	for child in get_children():
+		if child is Move:
+			move[child.label] = child
+			child.model = model
+			child.move_set = self
+			#child.corpus = corpus
+			#if child.db_label != "":
+				#child.DURATION = moves_repo.get_duration(child.db_label)
+			#child.animator = animator
+			#child.skeleton = skeleton
+#			child.base_animator = base_animator
+			#child.combat = combat
+			#child.moves_data_repo = moves_data_repo
+			#child.area_awareness = area_awareness
+			#child.legs = legs
+			#child.left_wrist = left_wrist
+			#child.assign_combos()
+	current_move = get_default_move()
+
+
+
+func moves_priority_sort(a : String, b : String):
+	if move[a].priority > move[b].priority:
+		return true
+	else:
+		return false
+
+func get_default_move() -> Move:
+	var is_lowest_priority_set : bool = false
+	var lowest_priority : Move
+	var test : Move
+	for label in move:
+		test = move[label]
+		
+		# Needs to have a seprate bool var 
+		# to avoid using lowest_priority before set
+		# this error will trigger even in the condition
+		# need to find cleaner alternative
+		if not is_lowest_priority_set:
+			lowest_priority = test
+			is_lowest_priority_set = true
+		
+		if test.priority <= lowest_priority.priority:
+			lowest_priority = test
+	
+	return lowest_priority
+
+
+func get_move_by_name(move_name : String) -> Move:
+	return move[move_name]
+
+func update(input : MovementInputPackage, delta : float): 
+	var relevance = current_move.check_relevance(input)
+	if relevance != "okay":
+		switch_to(relevance)
+	current_move.update_resources(delta)
+	current_move._update(input, delta)
+
+func switch_to(state : String):
+	current_move._on_exit_state()
+	current_move = move[state]
+	current_move._on_enter_state()
