@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cayr6j3bii25l"]
+[gd_scene load_steps=8 format=3 uid="uid://cayr6j3bii25l"]
 
 [ext_resource type="PackedScene" uid="uid://ishwtsd37a54" path="res://scenes/protolevel/level_geometry.tscn" id="1_emow3"]
 [ext_resource type="PackedScene" uid="uid://cixrlbffsyu60" path="res://scenes/protolevel/proto_world.tscn" id="1_kwqq7"]
 [ext_resource type="PackedScene" uid="uid://ceqatehl6iug" path="res://scenes/player_character/proto_player_character.tscn" id="3_2ag2n"]
+[ext_resource type="PackedScene" uid="uid://dxcqwf2qvwcc8" path="res://addons/3d_interactives/collectible.tscn" id="4_tbhg3"]
+[ext_resource type="PackedScene" uid="uid://dmbkkuvukccu2" path="res://addons/3d_interactives/interactive.tscn" id="5_bcg4p"]
+[ext_resource type="Script" uid="uid://brpnhwpleaked" path="res://scenes/protolevel/test_interaction.gd" id="6_32ns7"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bcg4p"]
+height = 1.3
 
 [node name="Protolevel" type="Node3D"]
 
@@ -13,3 +19,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("3_2ag2n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Collectible" parent="." instance=ExtResource("4_tbhg3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.60349, 0, 14)
+
+[node name="InteractivePedistal" parent="." node_paths=PackedStringArray("interactive") instance=ExtResource("5_bcg4p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.05026)
+interactive = NodePath("Node")
+trigger_area_size = Vector3(3, 2, 3)
+prompt_text = "cta!"
+prompt_position = Vector3(0, 0.75, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InteractivePedistal"]
+mesh = SubResource("CylinderMesh_bcg4p")
+
+[node name="Node" type="Node" parent="InteractivePedistal"]
+script = ExtResource("6_32ns7")

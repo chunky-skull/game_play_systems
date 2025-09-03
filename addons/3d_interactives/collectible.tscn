@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxcqwf2qvwcc8"]
+
+[ext_resource type="Script" uid="uid://d1uqescl8or4" path="res://addons/3d_interactives/collectible.gd" id="1_tmkxd"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_tmkxd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vn8xl"]
+size = Vector3(1.5, 1.5, 1.5)
+
+[node name="Collectible" type="Node3D"]
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("1_tmkxd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
+mesh = SubResource("SphereMesh_tmkxd")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_vn8xl")
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
