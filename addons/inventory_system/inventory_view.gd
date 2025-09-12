@@ -45,3 +45,7 @@ func add_item_to_list(item_label) -> void:
 func set_inventory_weight_label(new_label) -> void:
 	inventory_weight_label.text = new_label
 	
+func disable_item_actions() -> void:
+	equip_item.disabled = true
+	drop_item.disabled = true
+	use_item.disabled = true

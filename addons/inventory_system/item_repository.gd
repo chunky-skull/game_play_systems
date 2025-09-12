@@ -23,11 +23,9 @@ func init_item_database_indices() -> void:
 
 	item_database_indices.tail = tail
 	item_database_indices.add_item(node4.database_index)
-	#item_database_indices.remove_by_database_index(0)
 	var node = head
 	
 	while not node == null:
-		print(node.database_index, " ", node.quantity)
 		node = node.next
 
 func add_item_database_index(item_database_index:int) -> void:

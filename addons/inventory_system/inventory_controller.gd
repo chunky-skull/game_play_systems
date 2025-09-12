@@ -25,6 +25,8 @@ func on_view_ready() -> void:
 	view.connect_to_use_item_pressed(on_use_item_pressed)
 	view.connect_to_item_selected(on_item_selected)
 	
+	view.disable_item_actions()
+	
 	init_item_list()
 
 func on_pick_up_item_pressed() -> void:
@@ -48,6 +50,8 @@ func on_item_selected(list_index)-> void:
 	var execute: Callable = func(node):
 		var item = item_repository.get_item_by_database_index(node.database_index)
 		in_scope_variables.new_label += item.label
+		set_inventory_actions(item)
+		
 		active_item = node
 
 	item_repository.item_database_indices.iterate_to(to_conditional, execute)
@@ -59,6 +63,12 @@ func on_use_item_pressed() -> void:
 	view.set_last_item_used_label(last_used_label)
 	use(active_item.database_index)
 	on_drop_item_pressed()
+	
+func set_inventory_actions(item: Item) -> void:
+	view.equip_item.disabled = not item.can_equip
+	view.use_item.disabled = not item.can_use
+	view.drop_item.disabled = false
+	
 
 func init_item_list() -> void:
 	weight = 0.0
@@ -70,6 +80,7 @@ func init_item_list() -> void:
 		weight += (item.weight * item.quantity)
 	var weight_label = "Inventory Weight: "+ str(weight)
 	view.set_inventory_weight_label(weight_label)
+	view.disable_item_actions()
 
 func get_active_item() -> Item:
 	var item : Item = item_repository.get_item_by_database_index(active_item.database_index)
@@ -88,6 +99,7 @@ func on_drop_item_pressed() -> void:
 	view.item_list.clear()
 	var selected_label = "Selected Item: "
 	view.set_selected_item_label(selected_label)
+	view.drop_item.disabled = true
 	init_item_list()
 
 func get_all_items():
@@ -130,7 +142,6 @@ func equip(item_database_index)->void:
 	
 func examine(item_database_index)->void:
 	var item = item_repository.get_item_by_database_index(item_database_index)
-	pass
 	
 func is_over_encumbered()->bool:
 	return (weight >= weight_limit)
@@ -143,6 +154,7 @@ func check_and_emit_encumberence() -> void:
 	if over_encumbered and not is_over_encumbered():
 		over_encumbered = false
 		emit_exit_over_encumbered()
+		return
 
 func emit_enter_over_encumbered()->void:
 	emit_signal("enter_over_encumbered")

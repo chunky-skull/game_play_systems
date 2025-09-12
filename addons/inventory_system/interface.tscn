@@ -22,11 +22,13 @@ weight = 1.0
 script = ExtResource("2_7q6mg")
 label = "rune"
 weight = 0.5
+can_equip = false
 
 [node name="item3" type="Node3D" parent="Model/ItemDatabase"]
 script = ExtResource("2_7q6mg")
 label = "sword"
 weight = 1.5
+can_use = false
 
 [node name="item4" type="Node3D" parent="Model/ItemDatabase"]
 script = ExtResource("2_7q6mg")
@@ -42,6 +44,7 @@ weight = 0.1
 script = ExtResource("2_7q6mg")
 label = "hammer"
 weight = 5.0
+can_use = false
 
 [node name="ItemRepository" type="Node" parent="Model" node_paths=PackedStringArray("database")]
 script = ExtResource("1_6ice8")
