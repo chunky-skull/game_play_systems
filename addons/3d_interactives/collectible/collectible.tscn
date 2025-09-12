@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dxcqwf2qvwcc8"]
 
-[ext_resource type="Script" uid="uid://d1uqescl8or4" path="res://addons/3d_interactives/collectible.gd" id="1_tmkxd"]
+[ext_resource type="Script" uid="uid://d1uqescl8or4" path="res://addons/3d_interactives/collectible/collectible.gd" id="1_tmkxd"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_tmkxd"]
 

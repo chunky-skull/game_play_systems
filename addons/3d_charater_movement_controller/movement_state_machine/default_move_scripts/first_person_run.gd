@@ -13,7 +13,7 @@ func default_lifecycle(input : MovementInputPackage):
 	return top_affordable_input(input)
 
 func process_input_vector(input : MovementInputPackage, delta : float):
-	var input_direction = ( model.character.basis * Vector3(-input.direction.x, 0, -input.direction.y)).normalized()
+	var input_direction = ( model.character.basis * Vector3(input.direction.x, 0, input.direction.y)).normalized()
 	var facing : Vector3 = model.facing_vector.normalized()
 	var angle : float = facing.signed_angle_to(input_direction, Vector3.UP)
 	var target : Vector3 = facing.rotated(Vector3.UP, angle) * SPEED

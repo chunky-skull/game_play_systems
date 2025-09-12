@@ -6,7 +6,7 @@ var camera_basis : Basis
 @export var inputCollector : MovementInputCollector = MovementInputCollector.new()
 var facing_vector : Vector3 :
 	get():
-		facing_vector = -(character.basis.z)
+		facing_vector = character.basis.z
 		return facing_vector
 
 func _ready():

@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3q6xfc2mee7g"]
+
+[ext_resource type="Script" uid="uid://dkh8camb0f4v2" path="res://addons/3d_interactives/prompt_label_3d/prompt_model.gd" id="1_u43ji"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ak1ep"]
+viewport_path = NodePath("PromptTexture")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ak1ep"]
+resource_local_to_scene = true
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_ak1ep")
+albedo_texture_force_srgb = true
+texture_filter = 1
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_ak1ep"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ak1ep")
+size = Vector2(1, 0.3)
+
+[node name="Prompt3D" type="Node3D"]
+script = ExtResource("1_u43ji")
+
+[node name="PromptTexture" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(100, 30)
+
+[node name="Label" type="Label" parent="PromptTexture"]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PromptMesh" type="MeshInstance3D" parent="."]
+physics_interpolation_mode = 2
+mesh = SubResource("QuadMesh_ak1ep")
+skeleton = NodePath("../PromptTexture")

@@ -32,29 +32,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.530449, 0.444255)
 layers = 2
 mesh = SubResource("BoxMesh_s6bcf")
 
-[node name="MoveModel" type="Node" parent="." node_paths=PackedStringArray("move_set", "character")]
-script = ExtResource("1_vldkw")
-move_set = NodePath("../MoveSet")
-character = NodePath("..")
-metadata/_custom_type_script = "uid://6eoqf1txicuq"
-
-[node name="MoveSet" type="Node" parent="." node_paths=PackedStringArray("model")]
-script = ExtResource("2_vayym")
-model = NodePath("../MoveModel")
-metadata/_custom_type_script = "uid://e0s75pnk6jy8"
-
-[node name="idle" type="Node" parent="MoveSet"]
-script = ExtResource("3_vayym")
-label = "idle"
-animation = "idle"
-db_label = "idle"
-
-[node name="run" type="Node" parent="MoveSet"]
-script = ExtResource("3_vldkw")
-label = "run"
-priority = 2
-tracks_vector = true
-
 [node name="DebugUI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -65,3 +42,28 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="Movement" type="Node" parent="."]
+
+[node name="MoveModel" type="Node" parent="Movement" node_paths=PackedStringArray("move_set", "character")]
+script = ExtResource("1_vldkw")
+move_set = NodePath("../MoveSet")
+character = NodePath("../..")
+metadata/_custom_type_script = "uid://6eoqf1txicuq"
+
+[node name="MoveSet" type="Node" parent="Movement" node_paths=PackedStringArray("model")]
+script = ExtResource("2_vayym")
+model = NodePath("../MoveModel")
+metadata/_custom_type_script = "uid://e0s75pnk6jy8"
+
+[node name="idle" type="Node" parent="Movement/MoveSet"]
+script = ExtResource("3_vayym")
+label = "idle"
+animation = "idle"
+db_label = "idle"
+
+[node name="run" type="Node" parent="Movement/MoveSet"]
+script = ExtResource("3_vldkw")
+label = "run"
+priority = 2
+tracks_vector = true

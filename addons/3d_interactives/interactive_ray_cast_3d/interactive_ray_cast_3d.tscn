@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://beed6yysfg0qb"]
+
+[ext_resource type="Script" uid="uid://gsgtgapkuiwi" path="res://addons/3d_interactives/interactive_ray_cast_3d/interactive_ray_cast_3d.gd" id="1_ceumh"]
+
+[node name="InteractiveRayCast3D" type="RayCast3D"]
+target_position = Vector3(0, 0, -5)
+script = ExtResource("1_ceumh")

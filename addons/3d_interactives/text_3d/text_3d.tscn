@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdeq4cdmxc21c"]
+
+[ext_resource type="Script" uid="uid://bqlpp6ghtfmpb" path="res://addons/3d_interactives/text_3d/text_3d.gd" id="1_2uv5d"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_fotcw"]
+viewport_path = NodePath("TextTexture")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2uv5d"]
+resource_local_to_scene = true
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_fotcw")
+albedo_texture_force_srgb = true
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_jdadi"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_2uv5d")
+
+[node name="Text3D" type="Node3D"]
+script = ExtResource("1_2uv5d")
+
+[node name="TextTexture" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextTexture"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+scroll_active = false
+vertical_alignment = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_jdadi")
