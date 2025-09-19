@@ -1,16 +1,18 @@
 extends Control
 
-@onready var selected_item_label: Label = $Inventory/MarginContainer/HSplitContainer/VBoxContainer2/MarginContainer3/SelectedItem
-@onready var last_item_used_label: Label = $Inventory/MarginContainer/HSplitContainer/VBoxContainer2/MarginContainer2/LastItemUsed
-@onready var equiped_label: Label = $Inventory/MarginContainer/HSplitContainer/VBoxContainer2/HBoxContainer/MarginContainer2/Equiped 
-@onready var inventory_weight_label : Label = $Inventory/MarginContainer/HSplitContainer/VBoxContainer2/MarginContainer4/InventoryWeights
+@export var item_list: ItemList
 
-@onready var item_list: ItemList = $Inventory/MarginContainer/HSplitContainer/ItemList
+@export_category("Item Label")
+@export var inventory_weight_label : Label
+@export var last_item_used_label: Label
+@export var selected_item_label: Label
+@export var equiped_label: Label 
 
-@onready var pick_up_item: Button = $DevButtons/HBoxContainer/MarginContainer/PickUpItem
-@onready var equip_item: Button = $DevButtons/HBoxContainer/MarginContainer4/EquipItem
-@onready var drop_item: Button = $DevButtons/HBoxContainer/MarginContainer2/DropItem
-@onready var use_item: Button = $DevButtons/HBoxContainer/MarginContainer3/UseItem
+@export_category("Item Action")
+@export var pick_up_item: Button
+@export var equip_item: Button
+@export var drop_item: Button
+@export var use_item: Button
 
 func _ready() -> void:
 	pass

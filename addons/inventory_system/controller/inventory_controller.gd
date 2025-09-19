@@ -16,9 +16,9 @@ var weight : float
 var active_item
 
 func _ready() -> void:
-	view.ready.connect(on_view_ready)
+	_on_view_ready()
 
-func on_view_ready() -> void:
+func _on_view_ready() -> void:
 	view.connect_to_pick_up_item_pressed(on_pick_up_item_pressed)
 	view.connect_to_equip_item_pressed(on_equip_item_pressed)
 	view.connect_to_drop_item_pressed(on_drop_item_pressed)

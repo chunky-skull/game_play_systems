@@ -4,7 +4,7 @@ extends Area3D
 @export var trigger_area_size : Vector3
 
 @export_category("Prompt")
-@export var prompt: Node3D
+@export var prompt: Label3D
 @export var prompt_text : String
 @export var prompt_position : Vector3
 
@@ -16,8 +16,11 @@ var character : Node3D
 
 func _ready() -> void:
 	apply_trigger_area_size()
-	#if prompt.is_node_ready():
-	prompt.init(prompt_text, prompt_position)
+	prompt.position = prompt_position 
+	prompt.text = prompt_text
+	prompt.visible = false
+	body_entered.connect(_on_body_entered)
+	body_exited.connect(_on_body_exited)
 	
 func _unhandled_input(_event: InputEvent) -> void:
 	if interact_input_collector.pressed() and character_in_area:
@@ -25,18 +28,18 @@ func _unhandled_input(_event: InputEvent) -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	character_entered(body)
-	prompt.show()
+	prompt.visible = true
+	print_debug("body entered")
 
 func _on_body_exited(body: Node3D) -> void:
 	character_exited(body)
-	prompt.hide()
+	prompt.visible = false
 
 func apply_trigger_area_size() -> void:
 	interaction_collision_shape.shape.size = trigger_area_size
 
 func character_entered(body: Node3D) -> void:
 	character_in_area = true
-	#character = body
 
 func character_exited(body: Node3D) -> void:
 	character_in_area = false

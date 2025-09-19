@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4jmr4b0ul4bk"]
+
+[ext_resource type="Script" uid="uid://w7u6msismycv" path="res://addons/inventory_system/model/item_repository.gd" id="1_6ice8"]
+[ext_resource type="Script" uid="uid://cw0h8v3oo467c" path="res://addons/inventory_system/model/item_database.gd" id="1_523c4"]
+[ext_resource type="Script" uid="uid://bpmvu33miw1g7" path="res://addons/inventory_system/controller/inventory_controller.gd" id="1_vbiyp"]
+[ext_resource type="Script" uid="uid://bifh2nkb0vxdu" path="res://addons/inventory_system/item.gd" id="2_7q6mg"]
+[ext_resource type="PackedScene" uid="uid://bfdfbekh54jew" path="res://addons/inventory_system/view/inventory_list_view.tscn" id="5_v8u7e"]
+
+[node name="Inventory" type="Node" node_paths=PackedStringArray("item_repository", "view")]
+script = ExtResource("1_vbiyp")
+item_repository = NodePath("Model/ItemRepository")
+view = NodePath("InventoryListView")
+
+[node name="Model" type="Node" parent="."]
+
+[node name="ItemDatabase" type="Node" parent="Model"]
+script = ExtResource("1_523c4")
+
+[node name="item" type="Node3D" parent="Model/ItemDatabase"]
+script = ExtResource("2_7q6mg")
+label = "potion"
+weight = 1.0
+
+[node name="item2" type="Node3D" parent="Model/ItemDatabase"]
+script = ExtResource("2_7q6mg")
+label = "rune"
+weight = 0.5
+can_equip = false
+
+[node name="item3" type="Node3D" parent="Model/ItemDatabase"]
+script = ExtResource("2_7q6mg")
+label = "sword"
+weight = 1.5
+can_use = false
+
+[node name="item4" type="Node3D" parent="Model/ItemDatabase"]
+script = ExtResource("2_7q6mg")
+label = "armor"
+weight = 10.0
+
+[node name="item5" type="Node3D" parent="Model/ItemDatabase"]
+script = ExtResource("2_7q6mg")
+label = "ring"
+weight = 0.1
+
+[node name="item6" type="Node3D" parent="Model/ItemDatabase"]
+script = ExtResource("2_7q6mg")
+label = "hammer"
+weight = 5.0
+can_use = false
+
+[node name="ItemRepository" type="Node" parent="Model" node_paths=PackedStringArray("database")]
+script = ExtResource("1_6ice8")
+database = NodePath("../ItemDatabase")
+
+[node name="InventoryListView" parent="." instance=ExtResource("5_v8u7e")]

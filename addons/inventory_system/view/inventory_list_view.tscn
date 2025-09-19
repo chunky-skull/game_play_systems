@@ -1,0 +1,179 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfdfbekh54jew"]
+
+[ext_resource type="Script" uid="uid://osk3gvvrf7d1" path="res://addons/inventory_system/view/inventory_view.gd" id="1_lly22"]
+
+[node name="InventoryListView" type="Control" node_paths=PackedStringArray("item_list", "inventory_weight_label", "last_item_used_label", "selected_item_label", "equiped_label", "pick_up_item", "equip_item", "drop_item", "use_item")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1153.0
+offset_bottom = 506.0
+script = ExtResource("1_lly22")
+item_list = NodePath("Inventory/MarginContainer/HSplitContainer/ItemList")
+inventory_weight_label = NodePath("Inventory/MarginContainer/HSplitContainer/VBoxContainer2/MarginContainer4/InventoryWeights")
+last_item_used_label = NodePath("Inventory/MarginContainer/HSplitContainer/VBoxContainer2/MarginContainer2/LastItemUsed")
+selected_item_label = NodePath("Inventory/MarginContainer/HSplitContainer/VBoxContainer2/MarginContainer3/SelectedItem")
+equiped_label = NodePath("Inventory/MarginContainer/HSplitContainer/VBoxContainer2/HBoxContainer/MarginContainer/Equiped")
+pick_up_item = NodePath("DevButtons/HBoxContainer/MarginContainer/PickUpItem")
+equip_item = NodePath("DevButtons/HBoxContainer/MarginContainer4/EquipItem")
+drop_item = NodePath("DevButtons/HBoxContainer/MarginContainer2/DropItem")
+use_item = NodePath("DevButtons/HBoxContainer/MarginContainer3/UseItem")
+
+[node name="DevButtons" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DevButtons"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="DevButtons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="PickUpItem" type="Button" parent="DevButtons/HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Pick Up Item"
+
+[node name="MarginContainer2" type="MarginContainer" parent="DevButtons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="DropItem" type="Button" parent="DevButtons/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Drop Item"
+
+[node name="MarginContainer3" type="MarginContainer" parent="DevButtons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="UseItem" type="Button" parent="DevButtons/HBoxContainer/MarginContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Use Item"
+
+[node name="MarginContainer4" type="MarginContainer" parent="DevButtons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="EquipItem" type="Button" parent="DevButtons/HBoxContainer/MarginContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Equip Item"
+
+[node name="Inventory" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Inventory"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="Inventory/MarginContainer"]
+layout_mode = 2
+split_offset = 230
+
+[node name="ItemList" type="ItemList" parent="Inventory/MarginContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Inventory/MarginContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Inventory/MarginContainer/HSplitContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Inventory/MarginContainer/HSplitContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="Equiped" type="Label" parent="Inventory/MarginContainer/HSplitContainer/VBoxContainer2/HBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "Equiped:"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Inventory/MarginContainer/HSplitContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="Equiped" type="Label" parent="Inventory/MarginContainer/HSplitContainer/VBoxContainer2/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Inventory/MarginContainer/HSplitContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="LastItemUsed" type="Label" parent="Inventory/MarginContainer/HSplitContainer/VBoxContainer2/MarginContainer2"]
+layout_mode = 2
+text = "Last Item Used:"
+
+[node name="MarginContainer3" type="MarginContainer" parent="Inventory/MarginContainer/HSplitContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="SelectedItem" type="Label" parent="Inventory/MarginContainer/HSplitContainer/VBoxContainer2/MarginContainer3"]
+layout_mode = 2
+text = "Selected Item:"
+
+[node name="MarginContainer4" type="MarginContainer" parent="Inventory/MarginContainer/HSplitContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="InventoryWeights" type="Label" parent="Inventory/MarginContainer/HSplitContainer/VBoxContainer2/MarginContainer4"]
+layout_mode = 2
+text = "Inventory Weight: "
