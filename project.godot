@@ -16,7 +16,7 @@ config/icon="res://icon.svg"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/3d_charater_movement_controller/plugin.cfg", "res://addons/3d_interactives/plugin.cfg", "res://addons/first_person_camera/plugin.cfg", "res://addons/inventory_system/plugin.cfg")
+enabled=PackedStringArray("res://addons/3d_charater_movement_controller/plugin.cfg", "res://addons/3d_interactives/plugin.cfg", "res://addons/3d_play_scanner/plugin.cfg", "res://addons/first_person_camera/plugin.cfg", "res://addons/inventory_system/plugin.cfg")
 
 [input]
 
