@@ -3,9 +3,12 @@ extends CharacterBody3D
 @onready var move_model: MoveModel = $Movement/MoveModel
 @onready var fp_camera: Node3D = $FPCamera
 @export var debug := false
+
+@export var scanner: Node
 #@onready var interactive_ray_cast_3d: RayCast3D = $FPCamera/InteractiveRayCast3D
 
-#func _ready() -> void:
+func _ready() -> void:
+	scanner.reparent(fp_camera.x_pivot)
 	#interactive_ray_cast_3d.point_of_view = fp_camera.x_pivot
 	#interactive_ray_cast_3d.match_point_of_view_position()
 	#interactive_ray_cast_3d.match_point_of_view_basis()

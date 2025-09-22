@@ -5,7 +5,7 @@ var next
 var data
 var label
 
-func get_by_index(head, target_index: int) -> Node:
+func get_by_index(head:ScanDataLinkedList, target_index: int) -> ScanDataLinkedList:
 	var index: int = 0
 	var node = head
 	
@@ -18,7 +18,7 @@ func get_by_index(head, target_index: int) -> Node:
 	
 	return head
 
-func append(head, new_node) -> ScanDataLinkedList:
+func append(head:ScanDataLinkedList, new_node) -> ScanDataLinkedList:
 	var node = head
 	
 	if head.next == null:
@@ -31,7 +31,7 @@ func append(head, new_node) -> ScanDataLinkedList:
 	node.next = new_node
 	return head
 	
-func remove(head, remove_index: int) -> Node:
+func remove(head:ScanDataLinkedList, remove_index: int) -> ScanDataLinkedList:
 	var previous = head
 	var index: int = 0
 	var node = head

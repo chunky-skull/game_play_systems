@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://ceqatehl6iug"]
+[gd_scene load_steps=11 format=3 uid="uid://ceqatehl6iug"]
 
 [ext_resource type="Script" uid="uid://c8jgs7n0qqg0u" path="res://scenes/player_character/proto_player_character.gd" id="1_b7373"]
 [ext_resource type="Script" uid="uid://6eoqf1txicuq" path="res://addons/3d_charater_movement_controller/movement_model/move_model.gd" id="1_vldkw"]
 [ext_resource type="PackedScene" uid="uid://cimkqr4l7am4n" path="res://addons/first_person_camera/fp_camera_scene/fp_camera.tscn" id="2_njf6d"]
+[ext_resource type="PackedScene" uid="uid://byjyryyfmrqpl" path="res://addons/game_play_scanner_3d/controller/game_play_scanner_3d.tscn" id="2_shwbu"]
 [ext_resource type="Script" uid="uid://e0s75pnk6jy8" path="res://addons/3d_charater_movement_controller/movement_state_machine/move_set.gd" id="2_vayym"]
 [ext_resource type="Script" uid="uid://sy43loaffm40" path="res://addons/3d_charater_movement_controller/movement_state_machine/default_move_scripts/idle.gd" id="3_vayym"]
 [ext_resource type="Script" uid="uid://dsm7ex8qv42k0" path="res://addons/3d_charater_movement_controller/movement_state_machine/default_move_scripts/first_person_run.gd" id="3_vldkw"]
@@ -14,8 +15,11 @@
 [sub_resource type="BoxMesh" id="BoxMesh_s6bcf"]
 size = Vector3(0.4, 0.2, 0.3)
 
-[node name="PlayerCharacter" type="CharacterBody3D"]
+[node name="PlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("scanner")]
 script = ExtResource("1_b7373")
+scanner = NodePath("GamePlayScanner3D")
+
+[node name="GamePlayScanner3D" parent="." instance=ExtResource("2_shwbu")]
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_l6047")

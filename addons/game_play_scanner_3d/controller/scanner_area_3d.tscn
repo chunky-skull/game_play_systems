@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://3d34wqlf6fiy"]
+
+[ext_resource type="Script" uid="uid://b4kj8x2sssn1w" path="res://addons/game_play_scanner_3d/controller/scanner_area_3d.gd" id="1_o50er"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gon8w"]
+radius = 1.0
+height = 3.0
+
+[node name="ScannerArea3D" type="Area3D"]
+script = ExtResource("1_o50er")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -1.5)
+shape = SubResource("CapsuleShape3D_gon8w")
+
+[node name="Timer" type="Timer" parent="."]

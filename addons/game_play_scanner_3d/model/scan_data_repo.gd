@@ -20,3 +20,7 @@ func get_all_scan_entries() -> Array:
 func get_scan_entry(index: int):
 	var entry = scan_data_entries.get_by_index(scan_data_entries, index)
 	return entry
+
+func on_scanned(data) -> void:
+	#scan_data_entries = scan_data_entries.append(scan_data_entries, data)
+	pass

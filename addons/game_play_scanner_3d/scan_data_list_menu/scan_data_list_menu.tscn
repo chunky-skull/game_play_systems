@@ -1,19 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://fwtq7koky0jt"]
+[gd_scene load_steps=2 format=3 uid="uid://fwtq7koky0jt"]
 
-[ext_resource type="Script" uid="uid://c1rx6ckg4am1g" path="res://addons/game_play_scanner_3d/view/scan_data_list_view_controller.gd" id="1_1iygy"]
-[ext_resource type="Script" uid="uid://b6pbktnh52pfv" path="res://addons/game_play_scanner_3d/view/scan_data_repo.gd" id="1_80w82"]
+[ext_resource type="Script" uid="uid://c1rx6ckg4am1g" path="res://addons/game_play_scanner_3d/scan_data_list_menu/scan_data_list_view_controller.gd" id="1_rga6s"]
 
-[node name="ScanDataListView" type="Control"]
+[node name="ScanDataListMenu" type="Control" node_paths=PackedStringArray("entry_list", "selected_entry_label", "selected_entry_data")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_1iygy")
-
-[node name="ScanDataRepo" type="Node" parent="."]
-script = ExtResource("1_80w82")
+script = ExtResource("1_rga6s")
+entry_list = NodePath("HSplitContainer/ScrollContainer/EntryList")
+selected_entry_label = NodePath("HSplitContainer/MarginContainer/SelectedEntryLabel")
+selected_entry_data = NodePath("HSplitContainer/MarginContainer/SelectedEntryData")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
 layout_mode = 1
