@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://fwtq7koky0jt"]
+
+[ext_resource type="Script" uid="uid://c1rx6ckg4am1g" path="res://addons/game_play_scanner_3d/view/scan_data_list_view_controller.gd" id="1_1iygy"]
+[ext_resource type="Script" uid="uid://b6pbktnh52pfv" path="res://addons/game_play_scanner_3d/view/scan_data_repo.gd" id="1_80w82"]
+
+[node name="ScanDataListView" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1iygy")
+
+[node name="ScanDataRepo" type="Node" parent="."]
+script = ExtResource("1_80w82")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HSplitContainer"]
+layout_mode = 2
+
+[node name="EntryList" type="ItemList" parent="HSplitContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SelectedEntryLabel" type="Label" parent="HSplitContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="SelectedEntryData" type="Label" parent="HSplitContainer/MarginContainer"]
+layout_mode = 2

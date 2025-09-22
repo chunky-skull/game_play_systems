@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://byjyryyfmrqpl"]
 
-[ext_resource type="Script" uid="uid://b8uuyjlh6q2ex" path="res://addons/game_play_scanner_3d/game_play_scanner_3d_controller.gd" id="1_4qopc"]
+[ext_resource type="Script" uid="uid://b8uuyjlh6q2ex" path="res://addons/game_play_scanner_3d/controller/game_play_scanner_3d_controller.gd" id="1_iml6r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gon8w"]
 radius = 1.0
 height = 3.0
 
 [node name="GamePlayScanner3D" type="Node3D" node_paths=PackedStringArray("area3D", "timer")]
-script = ExtResource("1_4qopc")
+script = ExtResource("1_iml6r")
 area3D = NodePath("Area3D")
 timer = NodePath("Timer")
 
