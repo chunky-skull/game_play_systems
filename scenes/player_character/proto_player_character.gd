@@ -9,6 +9,7 @@ extends CharacterBody3D
 
 func _ready() -> void:
 	scanner.reparent(fp_camera.x_pivot)
+	scanner.close_scan_data_menu()
 	#interactive_ray_cast_3d.point_of_view = fp_camera.x_pivot
 	#interactive_ray_cast_3d.match_point_of_view_position()
 	#interactive_ray_cast_3d.match_point_of_view_basis()

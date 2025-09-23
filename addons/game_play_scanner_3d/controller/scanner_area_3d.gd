@@ -1,7 +1,9 @@
 extends Area3D
 
-@export var scan_input_label : String = "scan"
+@onready var shape: CollisionShape3D = $CollisionShape3D
 @onready var timer: Timer = $Timer
+
+@export var scan_input_label : String = "scan"
 
 var target
 
@@ -33,15 +35,17 @@ func _on_body_exited(body) -> void:
 
 func _on_timer_timeout() -> void:
 	print_debug("scanned data: ", target)
-	emit_signal("scanned", target)
+	emit_signal("scanned", target.scan_data)
 
 func _enable_scanner_area() -> void:
-	monitorable = true
-	monitoring = true
+	#monitorable = true
+	#monitoring = true
+	shape.disabled = false
 
 func _disable_scanner_area() -> void:
-	monitorable = false
-	monitoring = false
+	#monitorable = false
+	#monitoring = false
+	shape.disabled = true
 
 func init_scanner_collision_level(scan_collision_level) -> void:
 	set_collision_layer_value(scan_collision_level, true)

@@ -9,21 +9,22 @@ func get_by_index(head:ScanDataLinkedList, target_index: int) -> ScanDataLinkedL
 	var index: int = 0
 	var node = head
 	
-	while not node.next == null:
+	while not node == null:
 		if index == target_index:
 			return node
 		
 		node = node.next
-		++index
+		index += 1
 	
 	return head
 
 func append(head:ScanDataLinkedList, new_node) -> ScanDataLinkedList:
 	var node = head
 	
-	if head.next == null:
-		head.next = new_node
-		return head
+	if head.data == null:
+		print_debug("init list")
+		#head.next = new_node
+		return new_node
 	
 	while not node.next == null:
 		node = node.next

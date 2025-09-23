@@ -19,8 +19,6 @@ size = Vector3(0.4, 0.2, 0.3)
 script = ExtResource("1_b7373")
 scanner = NodePath("GamePlayScanner3D")
 
-[node name="GamePlayScanner3D" parent="." instance=ExtResource("2_shwbu")]
-
 [node name="Collider" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_l6047")
 
@@ -71,3 +69,5 @@ script = ExtResource("3_vldkw")
 label = "run"
 priority = 2
 tracks_vector = true
+
+[node name="GamePlayScanner3D" parent="." instance=ExtResource("2_shwbu")]

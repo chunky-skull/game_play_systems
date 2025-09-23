@@ -17,7 +17,7 @@ func update(delta) -> void:
 	rotation_vector.x = clamp(x_rotation, PI/-3, PI/2)
 	x_pivot.rotation.x = rotation_vector.x
 	input.mouse_motion = Vector2.ZERO
-		
+
 func _unhandled_input(event: InputEvent) -> void:
 	input.collect(event)
 

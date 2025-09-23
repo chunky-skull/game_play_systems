@@ -22,8 +22,13 @@ func init_entry_list()->void:
 	var length: int = scan_data_entries.size()
 	var index: int = 0
 	var data
-
+	var kill_count = 0
+	var loop_limit = 50
+	print_debug(index, scan_data_entries)
 	while index < length:
 		data = scan_data_entries[index]
 		entry_list.add_item(data.label)
-		++index
+		index += 1
+		#kill_count += 1
+		#if kill_count >= loop_limit:
+			#return
