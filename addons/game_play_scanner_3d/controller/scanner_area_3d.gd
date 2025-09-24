@@ -25,7 +25,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 func _on_body_entered(body) -> void:
-	#timer.wait_time = body.scan_time
+	timer.wait_time = body.scan_data.scan_time
 	target = body
 	timer.start()
 	
@@ -34,17 +34,14 @@ func _on_body_exited(body) -> void:
 	timer.stop()
 
 func _on_timer_timeout() -> void:
-	print_debug("scanned data: ", target)
 	emit_signal("scanned", target.scan_data)
+	#a way disable target from being scanned again
+	#target.set_collision_layer_value(scan_collision_level, false)
 
 func _enable_scanner_area() -> void:
-	#monitorable = true
-	#monitoring = true
 	shape.disabled = false
 
 func _disable_scanner_area() -> void:
-	#monitorable = false
-	#monitoring = false
 	shape.disabled = true
 
 func init_scanner_collision_level(scan_collision_level) -> void:
