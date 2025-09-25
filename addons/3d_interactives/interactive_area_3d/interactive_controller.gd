@@ -29,7 +29,6 @@ func _unhandled_input(_event: InputEvent) -> void:
 func _on_body_entered(body: Node3D) -> void:
 	character_entered(body)
 	prompt.visible = true
-	print_debug("body entered")
 
 func _on_body_exited(body: Node3D) -> void:
 	character_exited(body)

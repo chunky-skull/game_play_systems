@@ -29,3 +29,7 @@ func init_entry_list()->void:
 		#kill_count += 1
 		#if kill_count >= loop_limit:
 			#return
+
+func refresh_entry_list()-> void:
+	entry_list.clear()
+	init_entry_list()

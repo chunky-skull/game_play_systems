@@ -35,8 +35,6 @@ func _on_body_exited(body) -> void:
 
 func _on_timer_timeout() -> void:
 	emit_signal("scanned", target.scan_data)
-	#a way disable target from being scanned again
-	#target.set_collision_layer_value(scan_collision_level, false)
 
 func _enable_scanner_area() -> void:
 	shape.disabled = false
