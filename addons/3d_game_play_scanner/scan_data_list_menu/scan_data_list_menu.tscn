@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://fwtq7koky0jt"]
 
-[ext_resource type="Script" uid="uid://c1rx6ckg4am1g" path="res://addons/game_play_scanner_3d/scan_data_list_menu/scan_data_list_view_controller.gd" id="1_rga6s"]
+[ext_resource type="Script" uid="uid://c1rx6ckg4am1g" path="res://addons/3d_game_play_scanner/scan_data_list_menu/scan_data_list_view_controller.gd" id="1_rga6s"]
 
 [node name="ScanDataListMenu" type="Control" node_paths=PackedStringArray("entry_list", "selected_entry_label", "selected_entry_data")]
 layout_mode = 3

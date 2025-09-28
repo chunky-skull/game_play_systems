@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://byjyryyfmrqpl"]
 
-[ext_resource type="Script" uid="uid://b8uuyjlh6q2ex" path="res://addons/game_play_scanner_3d/controller/game_play_scanner_3d_controller.gd" id="1_iml6r"]
-[ext_resource type="PackedScene" uid="uid://3d34wqlf6fiy" path="res://addons/game_play_scanner_3d/controller/scanner_area_3d.tscn" id="2_tmxgv"]
-[ext_resource type="PackedScene" uid="uid://fwtq7koky0jt" path="res://addons/game_play_scanner_3d/scan_data_list_menu/scan_data_list_menu.tscn" id="3_3muxg"]
-[ext_resource type="Script" uid="uid://b6pbktnh52pfv" path="res://addons/game_play_scanner_3d/model/scan_data_repo.gd" id="4_3mlun"]
+[ext_resource type="Script" uid="uid://b8uuyjlh6q2ex" path="res://addons/3d_game_play_scanner/controller/game_play_scanner_3d_controller.gd" id="1_iml6r"]
+[ext_resource type="PackedScene" uid="uid://3d34wqlf6fiy" path="res://addons/3d_game_play_scanner/controller/scanner_area_3d.tscn" id="2_tmxgv"]
+[ext_resource type="PackedScene" uid="uid://fwtq7koky0jt" path="res://addons/3d_game_play_scanner/scan_data_list_menu/scan_data_list_menu.tscn" id="3_3muxg"]
+[ext_resource type="Script" uid="uid://b6pbktnh52pfv" path="res://addons/3d_game_play_scanner/model/scan_data_repo.gd" id="4_3mlun"]
 
 [node name="GamePlayScanner3D" type="Node3D" node_paths=PackedStringArray("scan_data_menu", "scanner_area3D", "scan_data_repo")]
 script = ExtResource("1_iml6r")

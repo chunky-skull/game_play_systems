@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://3d34wqlf6fiy"]
 
-[ext_resource type="Script" uid="uid://b4kj8x2sssn1w" path="res://addons/game_play_scanner_3d/controller/scanner_area_3d.gd" id="1_o50er"]
+[ext_resource type="Script" uid="uid://b4kj8x2sssn1w" path="res://addons/3d_game_play_scanner/controller/scanner_area_3d.gd" id="1_o50er"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gon8w"]
 radius = 1.0
