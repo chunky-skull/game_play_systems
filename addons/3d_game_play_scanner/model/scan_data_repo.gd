@@ -1,6 +1,6 @@
 extends Node
 
-var scan_data_entries: ScanDataLinkedList = ScanDataLinkedList.new()
+var scan_data_entries: ScanDataLinkedList = ScanDataLinkedList.new() #refactor to be an array
 
 func add_scan_data_entry(scan_data) -> void:
 	var scan_data_entry = ScanDataLinkedList.new()
@@ -10,7 +10,6 @@ func add_scan_data_entry(scan_data) -> void:
 func get_all_scan_entries() -> Array:
 	var scan_entries: Array
 	var entry = scan_data_entries
-	
 	
 	while not entry == null:
 		scan_entries.append(entry.data)

@@ -1,6 +1,9 @@
-extends Node
+class_name ItemDatabase extends Node
 
-class_name ItemDatabase
+#refactor to use DirAccess to get all the filename as a stirng in a PackedStringArray
+# That PackedStringArray will be the database.
+# Each file will be a custom resource. 
+# use a function to give each item resource an ID which is the resource's filename PackedStringArray index
 
 func _ready() -> void:
 	init_items()

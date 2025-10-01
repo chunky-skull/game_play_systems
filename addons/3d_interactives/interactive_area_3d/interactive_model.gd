@@ -1,5 +1,5 @@
-extends Node
-class_name Interactive
+@abstract
+class_name Interactive extends Node
 
-func activate() -> void:
-	pass
+@abstract
+func _on_activate(character) 

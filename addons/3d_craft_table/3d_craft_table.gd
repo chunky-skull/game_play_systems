@@ -1,63 +1,47 @@
-extends Node
+class_name CraftingTable extends Object
 
-var item_repo #a linked list of items the maker can make
+var item_repo: Array #an array of items the maker can make
 	# each entry needs to have:
 		# item ID
-		# item qauntity
-		# item raw material cost or reciepe
+		# item reciepe = [item_a.id, item_a.id, item_b.id]
 var selected #the item the player has selected from the craft item menu
 var craft_item_menu 
 
 # only needs the ID for game play items
-# needs access to:
-	# items available to make
-	# character's inventory:
-		# CRUD operations on raw materials there in
-		# CRUD operations on items there in
 # when the character activates a crafting table, their inventory is passed to the craft table
+# or rather than directly interacting with the character's inventory, it emits signals for each action
 
-signal add_item(item_id)
+signal remove_items(item_ids)
+signal add_items(item_ids)
 
-func activate() -> void:
+func activate(on_remove_items: Callable, on_add_items: Callable) -> void:
 	# opens the craft item menu
 	# highlights items that the character has enough or the right raw materials to make
-	pass
+	# connect the character's inventory to all the appropriate signals
+	remove_items.connect(on_remove_items)
+	add_items.connect(on_add_items)
 
-func deactivate() -> void:
+func deactivate(on_remove_items: Callable, on_add_items: Callable) -> void:
 	# closes the craft item menu
-	pass
-#func 
+	remove_items.disconnect(on_remove_items)
+	add_items.disconnect(on_add_items)
+
 func craft_selected_item() -> void:
 	# adds selected item ID to the character's inventory
 	_use_ingredients()
-	_add_to_inventory(selected.id)
+	emit_signal("add_items", [selected.id])
 
-func add_item_schema(schema) -> void:
+func add_menu_item(item_id) -> void:
 	# adds an item ID to the item_repo
-	pass
+	item_repo.append(item_id)
 
 func break_down_item(item_id) -> void:
 	# breaks down an item in the character's inventory into raw materials
-	var raw_materials = _extract_ingredients(item_id)
-	# adds the raw materials to character's inventory
-	_add_to_inventory(raw_materials)
-	pass
-
-func _extract_ingredients(item):
-	# gets the material cost for the item and returns the materials id and quanity as an array
-	var raw_materials = []
-	return raw_materials
+	var reciepe = selected.reciepe
+	emit_signal("add_items", reciepe)
+	emit_signal("remove_items", [item_id])
 
 func _use_ingredients() -> void:
 	# removes selected item's raw material cost from character's inventory
-	pass
-
-func _add_to_inventory(item_ids) -> void:
-	var index = 0
-	var length = item_ids.size()
-	
-	while index < length:
-		#character inventory.add_item(item_ids[index])
-		#or emmit_sginal("add_item", item_id[0])
-		index += 1
-	pass
+	var reciepe = selected.reciepe
+	emit_signal("remove_items", reciepe)

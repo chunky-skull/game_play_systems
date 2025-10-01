@@ -115,17 +115,26 @@ func fits(item) -> bool:
 	return true
 	
 func accept(item)->void:
-	weight += item.weight
-	item_repository.add_item_database_index(item.database_index)
+	add_item(item)
 	check_and_emit_encumberence()
 
+func add_item(item)->void:
+	weight += item.weight
+	item_repository.add_item_database_index(item.database_index)
+
 func reject(item)->void:
-	pass
+	var rejection_message: String = "Inventory full"
+	drop(item)
+	print_debug(rejection_message)
+	# gives player a rejected item message
 
 func drop(item)->void:
+	remove_item(item)
+	# instantiates removed it in game play world
+
+func remove_item(item)->void:
 	item_repository.remove_item_by_database_index(item.database_index)
 	weight -= item.weight
-	#check_and_emit_encumberence()
 
 func use(item_database_index)->void:
 	var item = item_repository.get_item_by_database_index(item_database_index)

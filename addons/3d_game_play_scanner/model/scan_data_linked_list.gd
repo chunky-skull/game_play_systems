@@ -1,5 +1,4 @@
-@abstract
-class_name LinkedList extends Object
+class_name ScanDataLinkedList extends Object
 
 var next
 
@@ -8,7 +7,7 @@ var data
 func _data():
 	return data
 
-func iterate(callback: Callable) -> LinkedList:
+func iterate(callback: Callable) -> ScanDataLinkedList:
 	var head = self
 	var node = head
 	
@@ -18,7 +17,7 @@ func iterate(callback: Callable) -> LinkedList:
 	
 	return head
 	
-func iterate_to(to: Callable, execute: Callable) -> LinkedList:
+func iterate_to(to: Callable, execute: Callable) -> ScanDataLinkedList:
 	var head = self
 	var node = head
 	
@@ -28,7 +27,7 @@ func iterate_to(to: Callable, execute: Callable) -> LinkedList:
 	execute.call(node)
 	return head
 
-func get_by_index(head:LinkedList, target_index: int) -> LinkedList:
+func get_by_index(head:ScanDataLinkedList, target_index: int) -> ScanDataLinkedList:
 	var index: int = 0
 	var node = head
 	
@@ -41,7 +40,7 @@ func get_by_index(head:LinkedList, target_index: int) -> LinkedList:
 	
 	return head
 
-func append(head:LinkedList, new_node) -> LinkedList:
+func append(head:ScanDataLinkedList, new_node) -> ScanDataLinkedList:
 	var node = head
 	
 	if head.data == null:
@@ -55,7 +54,7 @@ func append(head:LinkedList, new_node) -> LinkedList:
 	node.next = new_node
 	return head
 	
-func remove(head:LinkedList, remove_index: int) -> LinkedList:
+func remove(head:ScanDataLinkedList, remove_index: int) -> ScanDataLinkedList:
 	var previous = head
 	var index: int = 0
 	var node = head

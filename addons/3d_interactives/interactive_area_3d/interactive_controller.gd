@@ -1,6 +1,5 @@
 extends Area3D
 
-@export var interactive : Interactive
 @export var trigger_area_size : Vector3
 
 @export_category("Prompt")
@@ -14,6 +13,8 @@ extends Area3D
 var character_in_area : bool = false
 var character : Node3D
 
+signal activate(character)
+
 func _ready() -> void:
 	apply_trigger_area_size()
 	prompt.position = prompt_position 
@@ -24,7 +25,7 @@ func _ready() -> void:
 	
 func _unhandled_input(_event: InputEvent) -> void:
 	if interact_input_collector.pressed() and character_in_area:
-		interactive.activate()
+		emit_signal("activate", character)
 
 func _on_body_entered(body: Node3D) -> void:
 	character_entered(body)
@@ -38,7 +39,9 @@ func apply_trigger_area_size() -> void:
 	interaction_collision_shape.shape.size = trigger_area_size
 
 func character_entered(body: Node3D) -> void:
+	character = body
 	character_in_area = true
 
 func character_exited(body: Node3D) -> void:
+	character = body
 	character_in_area = false
