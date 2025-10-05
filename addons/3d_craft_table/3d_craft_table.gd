@@ -1,6 +1,6 @@
 class_name CraftingTable extends Object
 
-var item_repo: Array #an array of items the maker can make
+var recipe_repo: Array[CraftingRecipe] #an array of items the maker can make
 	# each entry needs to have:
 		# item ID
 		# item reciepe = [item_a.id, item_a.id, item_b.id]
@@ -31,9 +31,8 @@ func craft_selected_item() -> void:
 	_use_ingredients()
 	emit_signal("add_items", [selected.id])
 
-func add_menu_item(item_id) -> void:
-	# adds an item ID to the item_repo
-	item_repo.append(item_id)
+func add_recipe(recipe: CraftingRecipe) -> void:
+	recipe_repo.append(recipe)
 
 func break_down_item(item_id) -> void:
 	# breaks down an item in the character's inventory into raw materials
@@ -43,5 +42,5 @@ func break_down_item(item_id) -> void:
 
 func _use_ingredients() -> void:
 	# removes selected item's raw material cost from character's inventory
-	var reciepe = selected.reciepe
+	var reciepe = selected
 	emit_signal("remove_items", reciepe)

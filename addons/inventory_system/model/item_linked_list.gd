@@ -1,3 +1,5 @@
+#class_name ItemLinkedList extends Resource
+
 extends Node
 
 class_name ItemLinkedList

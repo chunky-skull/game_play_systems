@@ -1,8 +1,4 @@
-extends Node3D
-
-class_name Item
-
-
+class_name Item extends Node3D
 
 var database_index : int
 @export var label : String
