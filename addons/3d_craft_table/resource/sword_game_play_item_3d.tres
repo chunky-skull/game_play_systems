@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GamePlayItem3D" load_steps=3 format=3 uid="uid://uolth7p7qn7i"]
+
+[ext_resource type="Script" uid="uid://c3wgngcm0ajsw" path="res://addons/3d_game_play_item/item_effect.gd" id="1_7tpav"]
+[ext_resource type="Script" uid="uid://cd4fujuuq45y5" path="res://addons/3d_game_play_item/3d_game_play_item.gd" id="2_fj1j3"]
+
+[resource]
+script = ExtResource("2_fj1j3")
+label = "Sword"
+metadata/_custom_type_script = "uid://cd4fujuuq45y5"

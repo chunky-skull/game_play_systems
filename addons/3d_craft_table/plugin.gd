@@ -1,6 +1,8 @@
 @tool
 extends EditorPlugin
 
+# Dependencies:
+	# - 3D Game Play Item
 
 func _enable_plugin() -> void:
 	# Add autoloads here.

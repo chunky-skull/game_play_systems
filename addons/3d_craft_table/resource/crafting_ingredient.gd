@@ -1,5 +1,4 @@
-class_name CraftingIngredient
-extends Resource
+class_name CraftingIngredient extends Resource
 
-#@export var item : Item
-@export var count : int
+@export var item : GamePlayItem3D
+@export var amount : int

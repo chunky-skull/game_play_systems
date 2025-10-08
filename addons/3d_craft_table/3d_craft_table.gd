@@ -1,18 +1,24 @@
-class_name CraftingTable extends Object
+class_name CraftingTable extends Node
+@onready var crafting_menu: Control = $CraftingMenu
 
-var recipe_repo: Array[CraftingRecipe] #an array of items the maker can make
+@export var recipe_repo: Array[CraftingRecipe] #an array of items the maker can make
 	# each entry needs to have:
 		# item ID
 		# item reciepe = [item_a.id, item_a.id, item_b.id]
 var selected #the item the player has selected from the craft item menu
-var craft_item_menu 
-
 # only needs the ID for game play items
 # when the character activates a crafting table, their inventory is passed to the craft table
 # or rather than directly interacting with the character's inventory, it emits signals for each action
 
 signal remove_items(item_ids)
 signal add_items(item_ids)
+
+func _ready() -> void:
+	var init_recipes = func() -> void:
+		print_debug("init recipes")
+	crafting_menu.init_recipe_list(recipe_repo)
+	#crafting_menu.ready.connect(init_recipes)
+	print_debug("ready")
 
 func activate(on_remove_items: Callable, on_add_items: Callable) -> void:
 	# opens the craft item menu

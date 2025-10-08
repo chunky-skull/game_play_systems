@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=5 format=3 uid="uid://cu24e2uyisf7n"]
+
+[ext_resource type="Script" uid="uid://158ran6dpcw3" path="res://addons/3d_craft_table/resource/crafting_ingredient.gd" id="1_r1hrw"]
+[ext_resource type="Resource" uid="uid://uigd2cjxbd3h" path="res://addons/3d_craft_table/crafting_ingredients/sword_mass_crafting_ingredient.tres" id="2_v45i0"]
+[ext_resource type="Resource" uid="uid://uolth7p7qn7i" path="res://addons/3d_craft_table/resource/sword_game_play_item_3d.tres" id="3_q1xkn"]
+[ext_resource type="Script" uid="uid://uu81vqcu25ig" path="res://addons/3d_craft_table/crafting_recipe.gd" id="4_qs6ad"]
+
+[resource]
+script = ExtResource("4_qs6ad")
+ingredients = Array[ExtResource("1_r1hrw")]([ExtResource("2_v45i0")])
+output = ExtResource("3_q1xkn")
+metadata/_custom_type_script = "uid://uu81vqcu25ig"

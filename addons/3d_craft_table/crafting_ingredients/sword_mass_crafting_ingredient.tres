@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CraftingIngredient" load_steps=3 format=3 uid="uid://uigd2cjxbd3h"]
+
+[ext_resource type="Resource" uid="uid://bvih5mkhvifhj" path="res://addons/3d_craft_table/items/mass_game_play_item_3d.tres" id="1_hesen"]
+[ext_resource type="Script" uid="uid://158ran6dpcw3" path="res://addons/3d_craft_table/resource/crafting_ingredient.gd" id="2_vy7s4"]
+
+[resource]
+script = ExtResource("2_vy7s4")
+item = ExtResource("1_hesen")
+amount = 3
+metadata/_custom_type_script = "uid://158ran6dpcw3"
