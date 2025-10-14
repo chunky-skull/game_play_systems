@@ -1,13 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://bedi2xq74sgms"]
+[gd_scene load_steps=11 format=3 uid="uid://bedi2xq74sgms"]
 
 [ext_resource type="Script" uid="uid://bht54e7yx3ccl" path="res://addons/3d_craft_table/3d_craft_table.gd" id="1_060gr"]
 [ext_resource type="Script" uid="uid://uu81vqcu25ig" path="res://addons/3d_craft_table/crafting_recipe.gd" id="2_5jcwv"]
 [ext_resource type="Resource" uid="uid://cu24e2uyisf7n" path="res://addons/3d_craft_table/crafting_recipes/sword_crafting_recipe.tres" id="3_m8dyn"]
 [ext_resource type="Script" uid="uid://bomyp6lcer2yc" path="res://addons/3d_craft_table/crafting_menu.gd" id="4_ev2ub"]
+[ext_resource type="Script" uid="uid://158ran6dpcw3" path="res://addons/3d_craft_table/resource/crafting_ingredient.gd" id="4_ip4kc"]
+[ext_resource type="Script" uid="uid://dodfa15o46a8w" path="res://addons/3d_craft_table/recipe_ui.gd" id="5_5vihq"]
+[ext_resource type="Resource" uid="uid://bvih5mkhvifhj" path="res://addons/3d_craft_table/items/mass_game_play_item_3d.tres" id="5_t0qc1"]
+[ext_resource type="Resource" uid="uid://ckhgtmiytdbog" path="res://addons/3d_craft_table/items/healing_item.tres" id="6_t0qc1"]
+
+[sub_resource type="Resource" id="Resource_2j17r"]
+script = ExtResource("4_ip4kc")
+item = ExtResource("5_t0qc1")
+amount = 2
+metadata/_custom_type_script = "uid://158ran6dpcw3"
+
+[sub_resource type="Resource" id="Resource_d61g6"]
+script = ExtResource("2_5jcwv")
+ingredients = Array[ExtResource("4_ip4kc")]([SubResource("Resource_2j17r")])
+output = ExtResource("6_t0qc1")
+metadata/_custom_type_script = "uid://uu81vqcu25ig"
 
 [node name="CraftingTable" type="Node3D"]
 script = ExtResource("1_060gr")
-recipe_repo = Array[ExtResource("2_5jcwv")]([ExtResource("3_m8dyn")])
+recipe_repo = Array[ExtResource("2_5jcwv")]([ExtResource("3_m8dyn"), SubResource("Resource_d61g6")])
 
 [node name="CraftingMenu" type="Control" parent="."]
 layout_mode = 3
@@ -28,29 +44,41 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RecipeList" type="HBoxContainer" parent="CraftingMenu/MarginContainer"]
+[node name="RecipeList" type="VBoxContainer" parent="CraftingMenu/MarginContainer"]
 layout_mode = 2
 
 [node name="Recipe" type="VBoxContainer" parent="CraftingMenu/MarginContainer/RecipeList"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("5_5vihq")
 
-[node name="OutputContainer" type="MarginContainer" parent="CraftingMenu/MarginContainer/RecipeList/Recipe"]
+[node name="OutputContainer" type="VBoxContainer" parent="CraftingMenu/MarginContainer/RecipeList/Recipe"]
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="OutputLabel" type="Label" parent="CraftingMenu/MarginContainer/RecipeList/Recipe/OutputContainer"]
-layout_mode = 2
 
 [node name="OutputImage" type="TextureRect" parent="CraftingMenu/MarginContainer/RecipeList/Recipe/OutputContainer"]
 layout_mode = 2
 
-[node name="IngredientList" type="ItemList" parent="CraftingMenu/MarginContainer/RecipeList/Recipe"]
+[node name="OutputLabel" type="Label" parent="CraftingMenu/MarginContainer/RecipeList/Recipe/OutputContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-allow_search = false
-wraparound_items = false
+
+[node name="IngredientList" type="HBoxContainer" parent="CraftingMenu/MarginContainer/RecipeList/Recipe"]
+layout_mode = 2
+
+[node name="Ingredient" type="HBoxContainer" parent="CraftingMenu/MarginContainer/RecipeList/Recipe/IngredientList"]
+layout_mode = 2
+
+[node name="IngredientAmount" type="Label" parent="CraftingMenu/MarginContainer/RecipeList/Recipe/IngredientList/Ingredient"]
+layout_mode = 2
+
+[node name="IngredientLabel" type="Label" parent="CraftingMenu/MarginContainer/RecipeList/Recipe/IngredientList/Ingredient"]
+layout_mode = 2
+
+[node name="IngredientTextureRect" type="TextureRect" parent="CraftingMenu/MarginContainer/RecipeList/Recipe/IngredientList/Ingredient"]
+layout_mode = 2
 
 [node name="CraftButton" type="Button" parent="CraftingMenu/MarginContainer/RecipeList/Recipe"]
 layout_mode = 2
 size_flags_vertical = 3
+text = "craft"

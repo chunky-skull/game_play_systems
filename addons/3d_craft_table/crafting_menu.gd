@@ -1,7 +1,7 @@
 extends Control
 
 @onready var recipe: VBoxContainer = $MarginContainer/RecipeList/Recipe
-@onready var recipe_list: HBoxContainer = $MarginContainer/RecipeList
+@onready var recipe_list: VBoxContainer = $MarginContainer/RecipeList
 
 func _ready() -> void:
 	recipe.visible = false
@@ -10,19 +10,29 @@ func init_recipe_list(recipe_repo) -> void:
 	var length = recipe_repo.size()
 	var index = 0
 	while index < length:
-		var new_recipe = recipe.duplicate()
-		recipe_list.add_child(new_recipe)
-		var label = new_recipe.get_child(0).get_child(0)
-		var ingredient_list: ItemList = new_recipe.get_child(1)
-		var entry = recipe_repo[index]
-		var entry_length = entry.ingredients.size()
-		var entry_index = 0
-		while entry_index < entry_length:
-			var ingredient = entry.ingredients[entry_index]
-			var ingredient_text: String = str(ingredient.amount) + " " +ingredient.item.label 
-			ingredient_list.add_item(ingredient_text)
-			entry_index += 1
-			
-		label.text = entry.output.label
-		new_recipe.visible = true
+		_init_recipe_list_entry(recipe_repo, index)
 		index += 1
+	
+func _init_recipe_list_entry(recipe_repo, entry_index) -> void:
+	var entry = recipe_repo[entry_index]
+	var new_recipe = recipe.duplicate()
+	recipe_list.add_child(new_recipe)
+	_init_output_ingredient_list(entry, new_recipe)
+	new_recipe.set_output_label(entry.output.label)
+	new_recipe.visible = true
+
+func _init_output_ingredient_list(entry, new_recipe) -> void:
+	var ingredients_length = entry.ingredients.size()
+	var ingredient_index = 0
+	while ingredient_index < ingredients_length:
+		#var ingredient_text = _get_ingredient_text(entry, ingredient_index)
+		var ingredient = entry.ingredients[ingredient_index]
+		
+		
+		new_recipe.add_ingredient_list_entry(ingredient.item.label, ingredient.amount)
+		ingredient_index += 1
+
+func _get_ingredient_text(entry, index: int) -> String:
+	var ingredient = entry.ingredients[index]
+	var ingredient_text: String = str(ingredient.amount) + " " + ingredient.item.label
+	return ingredient_text

@@ -48,26 +48,33 @@ func append( new_node) -> GamePlayItem3DLinkedList:
 		return new_node
 	
 	while not node.next == null:
+		if node == new_node:
+			node.count += 1
+			return head
 		node = node.next
 	
 	node.next = new_node
 	return head
 	
-func remove( remove_index: int) -> GamePlayItem3DLinkedList:
+func remove( remove_index: int, remove_count: int = 1) -> GamePlayItem3DLinkedList:
 	var head = self
-	var previous = head
-	var index: int = 0
-	var node = head
-	
+	var node = head.next
 	if remove_index == 0:
-		node = head.next
-		head.next = null
-		return node
+		head.count -= remove_count
+		if head.count <= 0:
+			node = head.next
+			head.next = null
+			head = node
+		return head
 	
+	var previous = head
+	var index: int = 1
 	while not node.next == null:
 		if index == remove_index:
-			previous.next = node.next
-			node.next = null
+			node.count -= remove_count
+			if node.count <= 0:
+				previous.next = node.next
+				node.next = null
 			return head
 		
 		previous = node

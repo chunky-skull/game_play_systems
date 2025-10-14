@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GamePlayItem3D" load_steps=3 format=3 uid="uid://ckhgtmiytdbog"]
+
+[ext_resource type="Script" uid="uid://c3wgngcm0ajsw" path="res://addons/3d_game_play_item/item_effect.gd" id="1_gpjj5"]
+[ext_resource type="Script" uid="uid://cd4fujuuq45y5" path="res://addons/3d_game_play_item/3d_game_play_item.gd" id="2_k7qng"]
+
+[resource]
+script = ExtResource("2_k7qng")
+label = "Healing Item"
+metadata/_custom_type_script = "uid://cd4fujuuq45y5"

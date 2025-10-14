@@ -17,7 +17,6 @@ func _ready() -> void:
 	var init_recipes = func() -> void:
 		print_debug("init recipes")
 	crafting_menu.init_recipe_list(recipe_repo)
-	#crafting_menu.ready.connect(init_recipes)
 	print_debug("ready")
 
 func activate(on_remove_items: Callable, on_add_items: Callable) -> void:
@@ -50,3 +49,26 @@ func _use_ingredients() -> void:
 	# removes selected item's raw material cost from character's inventory
 	var reciepe = selected
 	emit_signal("remove_items", reciepe)
+
+func use_ingredients(item_repo: GamePlayItem3DLinkedList) -> void:
+	# how to get an item repo linked list index?
+	# how to get the selected recipe?
+	# selected: CraftingRecipe
+	var in_scope_variables: Dictionary = {
+		"index" : 0
+		}
+	var index: int = 0
+	var length: int = selected.ingredients.size()
+	while index < length:
+		var match_item: Callable = func(item)->bool:
+			in_scope_variables.index += 1
+			if item == selected.ingredients[index]:
+				return true
+			return false
+		var rm_item: Callable = func(item)-> void:
+			# how to remove the whole count?
+			item_repo.remove(in_scope_variables.index)
+		in_scope_variables.index = 0
+		item_repo.iterate_to(match_item, rm_item)
+		index += 1
+	pass
