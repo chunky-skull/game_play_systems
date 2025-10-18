@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://bedi2xq74sgms"]
 
 [ext_resource type="Script" uid="uid://bht54e7yx3ccl" path="res://addons/3d_craft_table/3d_craft_table.gd" id="1_060gr"]
-[ext_resource type="Script" uid="uid://uu81vqcu25ig" path="res://addons/3d_craft_table/crafting_recipe.gd" id="2_5jcwv"]
+[ext_resource type="Script" uid="uid://uu81vqcu25ig" path="res://addons/3d_craft_table/resource/crafting_recipe.gd" id="2_5jcwv"]
 [ext_resource type="Resource" uid="uid://cu24e2uyisf7n" path="res://addons/3d_craft_table/crafting_recipes/sword_crafting_recipe.tres" id="3_m8dyn"]
 [ext_resource type="Script" uid="uid://bomyp6lcer2yc" path="res://addons/3d_craft_table/crafting_menu.gd" id="4_ev2ub"]
 [ext_resource type="Script" uid="uid://158ran6dpcw3" path="res://addons/3d_craft_table/resource/crafting_ingredient.gd" id="4_ip4kc"]

@@ -21,6 +21,14 @@ func _init_recipe_list_entry(recipe_repo, entry_index) -> void:
 	new_recipe.set_output_label(entry.output.label)
 	new_recipe.visible = true
 
+func init_recipe_list_entry(entry, is_enabled:bool) -> void:
+	var new_recipe = recipe.duplicate()
+	recipe_list.add_child(new_recipe)
+	_init_output_ingredient_list(entry, new_recipe)
+	new_recipe.set_output_label(entry.output.label)
+	new_recipe.enable_craft_button(is_enabled)
+	new_recipe.visible = true
+
 func _init_output_ingredient_list(entry, new_recipe) -> void:
 	var ingredients_length = entry.ingredients.size()
 	var ingredient_index = 0

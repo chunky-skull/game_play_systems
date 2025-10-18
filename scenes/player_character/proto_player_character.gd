@@ -5,11 +5,20 @@ extends CharacterBody3D
 @export var debug := false
 
 @export var scanner: Node
+@export var test_inventory: Array[GamePlayItem3D]
 #@onready var interactive_ray_cast_3d: RayCast3D = $FPCamera/InteractiveRayCast3D
+var item_repo := GamePlayItem3DLinkedList.new()
+var inventory := {"item_repo":item_repo}
 
 func _ready() -> void:
 	scanner.reparent(fp_camera.x_pivot)
 	scanner.close_scan_data_menu()
+	var length := test_inventory.size()
+	var index: int = 0
+	while index < length:
+		var item = test_inventory[index]
+		inventory.item_repo.append_item(item)
+		index += 1
 	#interactive_ray_cast_3d.point_of_view = fp_camera.x_pivot
 	#interactive_ray_cast_3d.match_point_of_view_position()
 	#interactive_ray_cast_3d.match_point_of_view_basis()

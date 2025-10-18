@@ -8,7 +8,7 @@ func _ready() -> void:
 	interactive.activate.connect(_on_activate)
 
 func _on_activate(character) -> void:
-	crafting_table.activate(_on_remove_items(character), _on_add_items(character))
+	crafting_table.activate(_on_remove_items(character), _on_add_items(character), character.inventory)
 
 func _on_remove_items(character) -> Callable:
 	var remove_items := func(items):

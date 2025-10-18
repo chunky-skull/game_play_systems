@@ -4,6 +4,7 @@ extends VBoxContainer
 @onready var ingredient: HBoxContainer = $IngredientList/Ingredient
 @onready var output_label: Label = $OutputContainer/OutputLabel
 @onready var ingredient_list: HBoxContainer = $IngredientList
+@onready var craft_button: Button = $CraftButton
 
 func _ready() -> void:
 	ingredient.visible = false
@@ -17,3 +18,6 @@ func add_ingredient_list_entry(label: String, amount: int) -> void:
 	new_ingredient.get_child(0).text = str(amount)
 	new_ingredient.get_child(1).text = label
 	new_ingredient.visible = true
+
+func enable_craft_button(is_enabled: bool) -> void:
+	craft_button.disabled = is_enabled
