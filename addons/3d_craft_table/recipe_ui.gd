@@ -8,6 +8,9 @@ extends VBoxContainer
 
 func _ready() -> void:
 	ingredient.visible = false
+	
+func connect_button_press(button_action: Callable) -> void:
+	craft_button.pressed.connect(button_action)
 
 func set_output_label(new_label: String) -> void:
 	output_label.text = new_label
@@ -20,4 +23,4 @@ func add_ingredient_list_entry(label: String, amount: int) -> void:
 	new_ingredient.visible = true
 
 func enable_craft_button(is_enabled: bool) -> void:
-	craft_button.disabled = is_enabled
+	craft_button.disabled = not is_enabled

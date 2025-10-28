@@ -2,19 +2,16 @@ class_name GamePlayItem3DLinkedList extends Resource
 
 var head: GamePlayItem3DLinkedListSlot
 
-func iterate(callback: Callable) -> GamePlayItem3DLinkedList:
-	var head = self
+func iterate(callback: Callable) -> void:
 	var slot = head
 	
 	while not slot == null:
 		callback.call(slot)
 		slot = slot.next
 	
-	return head
-	
 func iterate_to(is_target: Callable, execute: Callable) -> void:
 	var slot = head
-	
+
 	while not _is_tail(slot):
 		if is_target.call(slot):
 			execute.call(slot)
@@ -22,7 +19,7 @@ func iterate_to(is_target: Callable, execute: Callable) -> void:
 		slot = slot.next
 
 func _is_tail(slot: GamePlayItem3DLinkedListSlot) -> bool:
-	return slot.next == null
+	return slot == null
 
 func get_by_index(target_index: int) -> GamePlayItem3DLinkedList:
 	var head = self
@@ -52,9 +49,10 @@ func append_item(item: GamePlayItem3D) -> void:
 		if slot.item == item:
 			slot.count += 1
 			return
+		if _is_tail(slot.next):
+			slot.next = new_slot
+			return
 		slot = slot.next
-	
-	slot.next = new_slot
 	
 func remove_by_item( remove_target: GamePlayItem3D, remove_count: int = 1) -> GamePlayItem3DLinkedListSlot:
 	var slot: GamePlayItem3DLinkedListSlot = head.next

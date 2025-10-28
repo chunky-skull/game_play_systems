@@ -35,3 +35,10 @@ func _physics_process(delta: float) -> void:
 func pivot(rotation_vector : Vector2) -> void:
 	var y_rotation := Vector3(0.0, rotation_vector.y, 0.0)
 	global_transform.basis = Basis.from_euler(y_rotation)
+
+func _unhandled_input(_event: InputEvent) -> void:
+	var input_pressed = Input.is_action_just_pressed("inventory")
+	if input_pressed:
+		var print_items = func(slot):
+			print_debug(slot.item.label, " ", slot.count)
+		inventory.item_repo.iterate(print_items)

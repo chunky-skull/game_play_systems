@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://bw3e8qdec1cc4"]
+
+[ext_resource type="Script" uid="uid://dodfa15o46a8w" path="res://addons/3d_craft_table/recipe_ui.gd" id="1_iwulk"]
+
+[node name="Recipe" type="VBoxContainer"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_iwulk")
+
+[node name="OutputContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="OutputImage" type="TextureRect" parent="OutputContainer"]
+layout_mode = 2
+
+[node name="OutputLabel" type="Label" parent="OutputContainer"]
+layout_mode = 2
+
+[node name="IngredientList" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Ingredient" type="HBoxContainer" parent="IngredientList"]
+layout_mode = 2
+
+[node name="IngredientAmount" type="Label" parent="IngredientList/Ingredient"]
+layout_mode = 2
+
+[node name="IngredientLabel" type="Label" parent="IngredientList/Ingredient"]
+layout_mode = 2
+
+[node name="IngredientTextureRect" type="TextureRect" parent="IngredientList/Ingredient"]
+layout_mode = 2
+
+[node name="CraftButton" type="Button" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+disabled = true
+text = "craft"
