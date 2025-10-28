@@ -10,16 +10,16 @@ func _ready() -> void:
 	crafting_menu.visible = false
 
 func activate(inventory) -> void:
-	# opens the craft item menu
-	# highlights items that the character has enough or the right raw materials to make
-	clear_recipe_list()
-	crafting_menu.init_recipe_list(recipe_repo)
-	print_debug(inventory)
-	set_each_item_enabled(inventory)
-	# connect the character's inventory to all the appropriate signals
-	crafting_menu.visible = true
+	if not is_active():
+		crafting_menu.init_recipe_list(recipe_repo)
+		set_each_item_enabled(inventory)
+		crafting_menu.visible = true
+		return
+	return
 
 func refresh_menu(inventory) -> void:
+	clear_recipe_list()
+	crafting_menu.init_recipe_list(recipe_repo)
 	set_each_item_enabled(inventory)
 
 func set_each_item_enabled(inventory) -> void:
@@ -57,10 +57,21 @@ func set_each_item_enabled(inventory) -> void:
 		index += 1
 
 func deactivate() -> void:
+	clear_recipe_list()
 	crafting_menu.visible = false
+
+func is_active() -> bool:
+	return crafting_menu.visible
+
+func toggle_activation(inventory) -> void:
+	if is_active():
+		deactivate()
+	else:
+		activate(inventory)
 
 func clear_recipe_list() -> void:
 	for child in crafting_menu.recipe_list.get_children():
+		crafting_menu.recipe_list.remove_child(child)
 		child.queue_free()
 
 func use_ingredients(ingredients, inventory) -> void:

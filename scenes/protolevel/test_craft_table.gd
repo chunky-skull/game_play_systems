@@ -8,7 +8,7 @@ func _ready() -> void:
 
 func _on_activate(character) -> void:
 	# refactor crafting_table.activate to only take character as an arguement
-	crafting_table.activate(character.inventory)
+	crafting_table.toggle_activation(character.inventory)
 
 func _on_body_exited(_character) -> void:
 	crafting_table.deactivate()

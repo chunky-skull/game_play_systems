@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ceqatehl6iug"]
+[gd_scene load_steps=20 format=3 uid="uid://ceqatehl6iug"]
 
 [ext_resource type="Script" uid="uid://c8jgs7n0qqg0u" path="res://scenes/player_character/proto_player_character.gd" id="1_b7373"]
 [ext_resource type="Script" uid="uid://6eoqf1txicuq" path="res://addons/3d_charater_movement_controller/movement_model/move_model.gd" id="1_vldkw"]
@@ -20,6 +20,31 @@ script = ExtResource("3_jv6wt")
 label = "mass"
 metadata/_custom_type_script = "uid://cd4fujuuq45y5"
 
+[sub_resource type="Resource" id="Resource_be84g"]
+script = ExtResource("3_jv6wt")
+label = "mass"
+metadata/_custom_type_script = "uid://cd4fujuuq45y5"
+
+[sub_resource type="Resource" id="Resource_jv6wt"]
+script = ExtResource("3_jv6wt")
+label = "mass"
+metadata/_custom_type_script = "uid://cd4fujuuq45y5"
+
+[sub_resource type="Resource" id="Resource_mm8ey"]
+script = ExtResource("3_jv6wt")
+label = "mass"
+metadata/_custom_type_script = "uid://cd4fujuuq45y5"
+
+[sub_resource type="Resource" id="Resource_vf02k"]
+script = ExtResource("3_jv6wt")
+label = "mass"
+metadata/_custom_type_script = "uid://cd4fujuuq45y5"
+
+[sub_resource type="Resource" id="Resource_3xx67"]
+script = ExtResource("3_jv6wt")
+label = "mass"
+metadata/_custom_type_script = "uid://cd4fujuuq45y5"
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l6047"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_khpwf"]
@@ -30,7 +55,7 @@ size = Vector3(0.4, 0.2, 0.3)
 [node name="PlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("scanner")]
 script = ExtResource("1_b7373")
 scanner = NodePath("GamePlayScanner3D")
-test_inventory = [SubResource("Resource_jvy46"), SubResource("Resource_4e0i8")]
+test_inventory = Array[ExtResource("3_jv6wt")]([SubResource("Resource_jvy46"), SubResource("Resource_4e0i8"), SubResource("Resource_be84g"), SubResource("Resource_jv6wt"), SubResource("Resource_mm8ey"), SubResource("Resource_vf02k"), SubResource("Resource_3xx67")])
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_l6047")
