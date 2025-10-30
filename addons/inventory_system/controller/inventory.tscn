@@ -1,13 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4jmr4b0ul4bk"]
+[gd_scene load_steps=8 format=3 uid="uid://b4jmr4b0ul4bk"]
 
 [ext_resource type="Script" uid="uid://w7u6msismycv" path="res://addons/inventory_system/model/item_repository.gd" id="1_6ice8"]
 [ext_resource type="Script" uid="uid://cw0h8v3oo467c" path="res://addons/inventory_system/model/item_database.gd" id="1_523c4"]
 [ext_resource type="Script" uid="uid://bpmvu33miw1g7" path="res://addons/inventory_system/controller/inventory_controller.gd" id="1_vbiyp"]
 [ext_resource type="Script" uid="uid://bifh2nkb0vxdu" path="res://addons/inventory_system/item.gd" id="2_7q6mg"]
+[ext_resource type="Script" uid="uid://bogwyk4w15r3g" path="res://addons/3d_game_play_item/game_play_item_3d_linked_list.gd" id="2_lxn44"]
 [ext_resource type="PackedScene" uid="uid://bfdfbekh54jew" path="res://addons/inventory_system/view/inventory_list_view.tscn" id="5_v8u7e"]
+
+[sub_resource type="Resource" id="Resource_0ch40"]
+script = ExtResource("2_lxn44")
+metadata/_custom_type_script = "uid://bogwyk4w15r3g"
 
 [node name="Inventory" type="Node" node_paths=PackedStringArray("item_repository", "view")]
 script = ExtResource("1_vbiyp")
+item_repo = SubResource("Resource_0ch40")
 item_repository = NodePath("Model/ItemRepository")
 view = NodePath("InventoryListView")
 

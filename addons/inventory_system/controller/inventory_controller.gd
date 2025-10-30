@@ -1,8 +1,9 @@
 extends Node
 
-@export var item_repository : ItemRepository
-@export var view : Control
-@export var weight_limit : float
+@export var item_repo: GamePlayItem3DLinkedList 
+@export var item_repository: ItemRepository
+@export var view: Control
+@export var weight_limit: float
 
 signal enter_over_encumbered
 signal exit_over_encumbered
@@ -120,7 +121,7 @@ func accept(item)->void:
 
 func add_item(item)->void:
 	weight += item.weight
-	item_repository.add_item_database_index(item.database_index)
+	item_repo.append_item(item)
 
 func reject(item)->void:
 	var rejection_message: String = "Inventory full"
@@ -133,14 +134,13 @@ func drop(item)->void:
 	# instantiates removed it in game play world
 
 func remove_item(item)->void:
-	item_repository.remove_item_by_database_index(item.database_index)
+	item_repo.remove_by_item(item)
 	weight -= item.weight
 
 func use(item_database_index)->void:
 	var item = item_repository.get_item_by_database_index(item_database_index)
 	emit_signal("use_item", item)
 
-	item.use()
 	weight -= item.weight
 	check_and_emit_encumberence()
 	
