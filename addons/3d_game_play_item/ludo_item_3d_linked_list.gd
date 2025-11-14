@@ -9,7 +9,7 @@ func iterate(callback: Callable) -> void:
 		callback.call(slot)
 		slot = slot.next
 	
-func iterate_to(is_target: Callable, execute: Callable) -> void:
+func iterate_to(is_target: Callable, execute: Callable = func(_slot):return) -> void:
 	var slot = head
 
 	while not _is_tail(slot):

@@ -28,8 +28,6 @@ func set_each_item_enabled(inventory) -> void:
 	
 	while index < length:
 		var recipe = recipe_repo[index]
-		var ingredients_index: int = 0
-		var ingredients_length: int = recipe.ingredients.size()
 		var in_scope_variables := {
 			"enabled": false
 		}
@@ -38,19 +36,23 @@ func set_each_item_enabled(inventory) -> void:
 			add_item(recipe.output, inventory)
 			use_ingredients(recipe.ingredients, inventory)
 			refresh_menu(inventory)
-			
-		while ingredients_index < ingredients_length:
-			var ingredient = recipe.ingredients[ingredients_index]
-			var is_target_item: Callable = func(slot):
-				return slot.item == ingredient.item
-			var set_enabled: Callable = func(slot):
-				if slot.count >= ingredient.amount:
-					in_scope_variables.enabled = true
-			inventory.item_repo.iterate_to(is_target_item, set_enabled)
-			if not in_scope_variables.enabled:
-				break
-			ingredients_index += 1
-			
+
+		var is_item: Callable = func(slot):
+			var ingredients_index: int = 0
+			var ingredients_length: int = recipe.ingredients.size()
+			while ingredients_index < ingredients_length:
+				var ingredient = recipe.ingredients[ingredients_index]
+				if slot.item == ingredient.item:
+					if slot.count >= ingredient.amount:
+						in_scope_variables.enabled = true
+						break
+					else:
+						return true
+				ingredients_index += 1
+			return false
+		
+		inventory.item_repo.iterate_to(is_item)
+
 		var recipe_ui = crafting_menu.recipe_list.get_child(index)
 		crafting_menu.set_recipe_list_entry_button(recipe_ui, button_action, in_scope_variables.enabled)
 
