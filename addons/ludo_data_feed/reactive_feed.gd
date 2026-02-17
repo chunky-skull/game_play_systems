@@ -1,7 +1,7 @@
 class_name ReactiveFeed
 extends Resource
 
-var disconnect_forwarding : Callable = func() -> void: return
+var _disconnect_forwarding : Callable = func() -> void: return
 
 var _broadcast : Callable
 
@@ -16,10 +16,13 @@ func _init(reactive_data, parent_feed: ReactiveData = null) -> void:
 		set_forwarding_connection(parent_feed)
 
 func set_forwarding_connection(parent_feed: ReactiveData) -> void:
-	disconnect_forwarding.call()
+	disconnect_forwarding()
 	update_broadcast.connect(parent_feed.react._forward_broadcast.bind(parent_feed))
-	disconnect_forwarding = func() -> void:
+	_disconnect_forwarding = func() -> void:
 		update_broadcast.disconnect(parent_feed._forward_broadcast.bind(parent_feed))
 
 func manual_broadcast() -> void:
 	_broadcast.call()
+
+func disconnect_forwarding() -> void:
+	_disconnect_forwarding.call()
