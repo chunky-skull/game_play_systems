@@ -11,6 +11,9 @@ signal exit_over_encumbered
 signal equip_item(item:Item)
 signal use_item(item:Item)
 
+signal item_added(item:Item)
+signal item_removed(item:Item)
+
 var over_encumbered : bool = false
 var weight : float 
 
@@ -122,6 +125,7 @@ func accept(item)->void:
 func add_item(item)->void:
 	weight += item.weight
 	item_repo.append_item(item)
+	emit_signal("item_added", item)
 
 func reject(item)->void:
 	var rejection_message: String = "Inventory full"
@@ -131,6 +135,7 @@ func reject(item)->void:
 
 func drop(item)->void:
 	remove_item(item)
+	emit_signal("item_removed", item)
 	# instantiates removed it in game play world
 
 func remove_item(item)->void:

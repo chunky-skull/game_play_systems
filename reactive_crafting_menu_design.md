@@ -30,12 +30,9 @@ How can I avoid the nested loops? Let's think about the situation I have now:
          
          2. if the not, the recipe's availability is set to false.
 
-
-
 I should look at the code I have already for this system. 
 
 I was hoping that setting up the reactive data type would help get rid of some of this crafting menu loops. It can. At least the first loop. Maybe I can set up the inventory to broadcast when an item is added to it. In that broadcast, I can include the new item and its current amount. The crafting menu then loop through the crafting recipes and their ingredient lists. This would eliminate the first loop were it goes through each item in character's inventory. 
-
 
 ⭐Could I take it further? Maybe each crafting recipe subscribes to the inventory. When the inventory is changed, each recipe checks to see if the change is relevant to them. If it is, each recipe checks to see if it is available to the character. So:
 
@@ -49,4 +46,8 @@ I was hoping that setting up the reactive data type would help get rid of some o
 
 That is one loop with no nested loops. However, it is one loop that each crafting recipe does at the same time. I don't know the performance cost for that would be.  I would imaging slightly better than loops that are nested three levels deep.
 
-To implement this I would need to change how reactive data works. Rather than the parent data being broadcast with each change, I would need to it up to broadcast the child data affected by the change. This functionality should be specific to how the character's inventory works. This system could also work for quest and progression items.  ⭐
+To implement this I would need to change how reactive data works. Rather than the parent data being broadcast with each change, I would need to it up to broadcast the child data affected by the change. This functionality should be specific to how the character's inventory works. This system could also work for quest and progression items.  
+
+Maybe I don need to change the implementation of the reactive data, but instead I can simply write the inventory to have this functionality. So the inventory emits a "item_subtracted" and "item_added" signal. Quest trackers and crafting menus connect to the signal with logic that decides what to do with the added or subtracted item. I am no longer certain that the reactive data type is needed for this use case. 
+
+⭐

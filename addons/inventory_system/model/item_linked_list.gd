@@ -1,8 +1,7 @@
 #class_name ItemLinkedList extends Resource
 
-extends Node
-
 class_name ItemLinkedList
+extends Node
 
 var debug_recursive_limit : int = 2000
 var debug_recursive_count : int = 0

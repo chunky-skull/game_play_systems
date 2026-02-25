@@ -1,8 +1,6 @@
 class_name ReactiveFeed
 extends Resource
 
-#need to figure out a way to begin testing all this code
-
 var _disconnect_forwarding : Callable = func() -> void: return
 
 var _broadcast : Callable
