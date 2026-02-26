@@ -14,6 +14,9 @@ signal use_item(item:Item)
 signal item_added(item:Item)
 signal item_removed(item:Item)
 
+signal ingredient_added(item:Item)
+signal ingredient_removed(item:Item)
+
 var over_encumbered : bool = false
 var weight : float 
 
@@ -120,13 +123,20 @@ func fits(item) -> bool:
 	
 func accept(item)->void:
 	add_item(item)
+	weight += item.weight
 	check_and_emit_encumberence()
 
 func add_item(item)->void:
-	weight += item.weight
 	item_repo.append_item(item)
-	emit_signal("item_added", item)
+	if is_ingredient(item):
+		#figure out how to get rid of this condition
+		emit_signal("ingredient_added", item)
+	else:
+		emit_signal("item_added", item)
 
+func is_ingredient(item)->bool:
+	return item.type == "ingredient"
+	
 func reject(item)->void:
 	var rejection_message: String = "Inventory full"
 	drop(item)
@@ -135,12 +145,16 @@ func reject(item)->void:
 
 func drop(item)->void:
 	remove_item(item)
-	emit_signal("item_removed", item)
+	weight -= item.weight
+	check_and_emit_encumberence()
 	# instantiates removed it in game play world
 
 func remove_item(item)->void:
 	item_repo.remove_by_item(item)
-	weight -= item.weight
+	if is_ingredient(item):
+		emit_signal("ingredient_removed", item)
+	else:
+		emit_signal("item_removed", item)
 
 func use(item_database_index)->void:
 	var item = item_repository.get_item_by_database_index(item_database_index)
