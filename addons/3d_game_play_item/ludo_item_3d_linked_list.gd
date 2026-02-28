@@ -8,7 +8,8 @@ func iterate(callback: Callable) -> void:
 	while not slot == null:
 		callback.call(slot)
 		slot = slot.next
-	
+
+#refactor second argument out
 func iterate_to(is_target: Callable, execute: Callable = func(_slot):return) -> void:
 	var slot = head
 
@@ -35,7 +36,7 @@ func get_by_index(target_index: int) -> GamePlayItem3DLinkedList:
 	
 	return head
 
-func append_item(item: GamePlayItem3D) -> void:
+func append_item(item: GamePlayItem3D) -> GamePlayItem3DLinkedListSlot:
 	var slot := head
 	var new_slot := GamePlayItem3DLinkedListSlot.new()
 	new_slot.item = item
@@ -43,16 +44,18 @@ func append_item(item: GamePlayItem3D) -> void:
 	if head == null:
 		print_debug("init list")
 		head = new_slot
-		return
+		return head
 	
 	while not _is_tail(slot):
 		if slot.item == item:
 			slot.count += 1
-			return
+			break
 		if _is_tail(slot.next):
 			slot.next = new_slot
-			return
+			return new_slot
 		slot = slot.next
+	return slot
+		
 	
 func remove_by_item( remove_target: GamePlayItem3D, remove_count: int = 1) -> GamePlayItem3DLinkedListSlot:
 	var slot: GamePlayItem3DLinkedListSlot = head.next

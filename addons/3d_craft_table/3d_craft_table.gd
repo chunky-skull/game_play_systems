@@ -8,6 +8,10 @@ var selected_recipe: CraftingRecipe #the item the player has selected from the c
 
 func _ready() -> void:
 	crafting_menu.visible = false
+	#how to get access to the character's inventory to connect to "ingredient_added" 
+	#and "ingredient_removed" signals?
+	#make the character's inventory a singleton
+	#maybe make the crafting menu a singleton too
 
 func activate(inventory) -> void:
 	if not is_active():
@@ -21,6 +25,19 @@ func refresh_menu(inventory) -> void:
 	clear_recipe_list()
 	crafting_menu.init_recipe_list(recipe_repo)
 	set_each_item_enabled(inventory)
+
+func is_item_enabled(recipe, slot) -> bool:
+	var ingredient_index := 0
+	var ingredients_length = recipe.ingredients.size()
+	var enabled := false
+	var ingredient
+	while ingredient_index < ingredients_length:
+		ingredient = recipe.ingredients[ingredient_index]
+		if slot.item == ingredient:
+			if slot.count >= ingredient.amount:
+				enabled = true
+		ingredient_index += 1
+	return enabled
 
 func set_each_item_enabled(inventory) -> void:
 	var index: int = 0
@@ -52,6 +69,7 @@ func set_each_item_enabled(inventory) -> void:
 			return false
 		
 		inventory.item_repo.iterate_to(is_item)
+		#item_repo is ludo_item_3d_linked_list
 
 		var recipe_ui = crafting_menu.recipe_list.get_child(index)
 		crafting_menu.set_recipe_list_entry_button(recipe_ui, button_action, in_scope_variables.enabled)

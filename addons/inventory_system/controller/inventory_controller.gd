@@ -1,7 +1,7 @@
 extends Node
 
 @export var item_repo: GamePlayItem3DLinkedList 
-@export var item_repository: ItemRepository
+@export var item_repository: ItemRepository #refactor this out
 @export var view: Control
 @export var weight_limit: float
 
@@ -127,10 +127,11 @@ func accept(item)->void:
 	check_and_emit_encumberence()
 
 func add_item(item)->void:
-	item_repo.append_item(item)
+	var slot = item_repo.append_item(item)
 	if is_ingredient(item):
 		#figure out how to get rid of this condition
-		emit_signal("ingredient_added", item)
+		#maybe something like emit_signal(item.type+"_added", item)
+		ingredient_added.emit(slot)
 	else:
 		emit_signal("item_added", item)
 
