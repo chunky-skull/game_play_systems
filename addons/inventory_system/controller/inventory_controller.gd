@@ -1,5 +1,6 @@
 extends Node
 
+#refactor so that this can become an singleton
 @export var item_repo: GamePlayItem3DLinkedList 
 @export var item_repository: ItemRepository #refactor this out
 @export var view: Control
