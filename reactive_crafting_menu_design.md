@@ -51,3 +51,11 @@ To implement this I would need to change how reactive data works. Rather than th
 Maybe I don need to change the implementation of the reactive data, but instead I can simply write the inventory to have this functionality. So the inventory emits a "item_subtracted" and "item_added" signal. Quest trackers and crafting menus connect to the signal with logic that decides what to do with the added or subtracted item. I am no longer certain that the reactive data type is needed for this use case. 
 
 ⭐
+
+To make the above described system work, I need to make the inventory data and controller an auto-loaded singleton. The problem is how to I keep this singleton from becoming a giant file. Also I like being able to create items and set up variables in the editor. I clearly need to learn more about what I can do with a singleton in Godot.
+
+
+
+The Inventory Item Linked List is an auto-loaded singleton. This is where the data about the items in the character's inventory is stored.  The crafting recipe list is also an auto-loaded singleton. That way I don't need to re-enable the recipes list every time the character enters a new scene. 
+
+When The crafting plugin is enabled, the crafting menu connects each available recipe to the global inventory linked list's "ingredient_added/removed" signals.

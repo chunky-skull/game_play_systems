@@ -81,3 +81,12 @@ func remove_by_item( remove_target: GamePlayItem3D, remove_count: int = 1) -> Ga
 		++index
 	
 	return head
+	
+func get_all_items() -> Array[GamePlayItem3DLinkedListSlot]:
+	var all_items : Array[GamePlayItem3DLinkedListSlot] 
+	var call_back := func(slot):
+		all_items.append(slot)
+	
+	iterate(call_back)
+
+	return all_items
