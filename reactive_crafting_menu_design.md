@@ -52,10 +52,58 @@ Maybe I don need to change the implementation of the reactive data, but instead 
 
 ⭐
 
-To make the above described system work, I need to make the inventory data and controller an auto-loaded singleton. The problem is how to I keep this singleton from becoming a giant file. Also I like being able to create items and set up variables in the editor. I clearly need to learn more about what I can do with a singleton in Godot.
+~~To make the above described system work, I need to make the inventory data and controller an auto-loaded singleton. The problem is how to I keep this singleton from becoming a giant file. Also I like being able to create items and set up variables in the editor. I clearly need to learn more about what I can do with a singleton in Godot.~~
 
+~~The Inventory Item Linked List is an auto-loaded singleton. This is where the data about the items in the character's inventory is stored.  The crafting recipe list is also an auto-loaded singleton. That way I don't need to re-enable the recipes list every time the character enters a new scene.~~
 
+~~There is the database, SQLite. Scripts get data from the db. In the case of the inventory system and the crafting system, how does the crafting menu connect each crafting recipe to the inventory's "ingredient_added/removed" signals?~~
 
-The Inventory Item Linked List is an auto-loaded singleton. This is where the data about the items in the character's inventory is stored.  The crafting recipe list is also an auto-loaded singleton. That way I don't need to re-enable the recipes list every time the character enters a new scene. 
+the inventory component has: 
 
-When The crafting plugin is enabled, the crafting menu connects each available recipe to the global inventory linked list's "ingredient_added/removed" signals.
+- the item_repository, a linked list that extends resource and uses a slot datatype to store an item's data and count. 
+  
+  - The item_repository stores the item data that the character has in inventory; 
+
+- an exported property for an encumbrance limit; 
+
+- methods for using, dropping, adding, examining, and equipping items; 
+
+- signals for item_add/removed that provides the effected item_repository slot
+
+- entering/leaving_over_encumbrance signals
+
+The crafting component has: 
+
+- the recipe_repository that extends resource and has an array of recipes that are available to the character; 
+  
+  - a recipe is a resource that has:
+    
+    - an output item
+    
+    - an ingredient array of dictionaries that have item id's or labels, an integer "amount" field, a Boolean "available" field
+    
+    - an "enabled" Boolean property
+    
+    - a set_enabled_by_ingredient method takes an item id or label, and an amount as arguments. it loops through the ingredient list, checks if the item matches with an ingredient, sets that ingredient's "available" field if the amount > than an ingredient's amount, and finally it set's the recipe's "enabled" property based on the ingredients' "available" fields.
+
+- a property for a selected recipe; 
+
+- a method for adding recipes to the recipe_repository; 
+
+- a "use_recipe" and signal that provides a selected recipe; 
+
+- a "recipe_added" signal that provides the new recipe.
+
+I need some sort of "glue" script:
+
+- that connects to the crafting component's "recipe_added" signal. 
+  
+  - when that signal emits, the scripts connects its own "ingredient_added/removed" signals to the recipe's set_enabled_by_ingredient method
+
+- connects the inventory's "item_added/removed" signal
+  
+  - when that signal emits, the script checks if the item has the "ingredient" type and emits its ingredient_added/removed signals. 
+
+- connects the crafting component's use_recipe signal with the inventory's add_items and remove_items methods.
+
+<u>How does this script have access to both the inventory and crafting components?</u> 
