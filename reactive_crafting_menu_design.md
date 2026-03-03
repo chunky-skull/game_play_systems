@@ -117,4 +117,36 @@ Maybe the script attaches to the player's script. The player will need to have t
 
 So far the only functional options seems to be to work with some sort of singleton. I am trying to avoid that. Not sure why...
 
-What part of the game has access to both the inventory and crafting components?  
+What part of the game has access to both the inventory and crafting components?
+
+
+
+The more I think about it, the more it makes sense to have the player component own the inventory and crafting components. The player would have all the components that relate to game play.
+
+
+
+Player component:
+
+- character component:
+  
+  - movement component
+  
+  - battle component
+  
+  - corpus component
+  
+  - equipped component
+
+- crafting component
+
+- inventory component
+
+- quest component
+
+- ludo environment scanner component
+
+- ludo map component
+
+- journal component
+
+- bestiary component
