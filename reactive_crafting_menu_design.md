@@ -107,3 +107,14 @@ I need some sort of "glue" script:
 - connects the crafting component's use_recipe signal with the inventory's add_items and remove_items methods.
 
 <u>How does this script have access to both the inventory and crafting components?</u> 
+
+let's just start throwing stuff at the wall. Maybe I can set up some "higher level glue," as Jonas calls it, to connect the these components. Something like an "item manager" that is an auto-loaded singleton.
+
+Or the inventory and crafting components can be auto-loaded singletons. The "glue" script just connects the two. 
+I was also thinking I could  make the script attached to the character script somehow. It sounds correct that the character script would have access to at least the inventory script. Though, as I think about it, I am not so sure. The player access the menu through a button, not by making the character preform some sort of action.
+
+Maybe the script attaches to the player's script. The player will need to have the ability to open the inventory menu and the crafting menu. But thinking again reveals that the player script will only need the ability to open those menus. The menus themselves will have the ability to handle the player's interactions.
+
+So far the only functional options seems to be to work with some sort of singleton. I am trying to avoid that. Not sure why...
+
+What part of the game has access to both the inventory and crafting components?  
