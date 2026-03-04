@@ -119,15 +119,11 @@ So far the only functional options seems to be to work with some sort of singlet
 
 What part of the game has access to both the inventory and crafting components?
 
-
-
 The more I think about it, the more it makes sense to have the player component own the inventory and crafting components. The player would have all the components that relate to game play.
 
+Player component: has the "glue" script that connects all the sub components together
 
-
-Player component:
-
-- character component:
+- character component: has the "glue" script that connects all the sub components together
   
   - movement component
   
@@ -150,3 +146,11 @@ Player component:
 - journal component
 
 - bestiary component
+
+The player component is it's own scene, and a child scene of the level the player is in. 
+
+
+
+Where does the crafting component's recipe repository get its recipes from? Should the recipe repository be an auto-loaded singleton? And should the inventory's item repository be one also?
+
+I could avoid that by figuring out how to pass a resource from one to scene to another. 
