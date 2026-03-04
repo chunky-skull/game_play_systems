@@ -149,8 +149,11 @@ Player component: has the "glue" script that connects all the sub components tog
 
 The player component is it's own scene, and a child scene of the level the player is in. 
 
-
-
 Where does the crafting component's recipe repository get its recipes from? Should the recipe repository be an auto-loaded singleton? And should the inventory's item repository be one also?
 
-I could avoid that by figuring out how to pass a resource from one to scene to another. 
+I could avoid that by figuring out how to pass a resource from one to scene to another.
+
+
+
+How about a "PlayerSpawnPoint" node for each "level's" scene. every "level" scene has this node. When transitioning between levels, the Player node is set as a child of the PlayerSpawnPoint. 
+So the player node only moves throughout a level while in the spawn point node? 
