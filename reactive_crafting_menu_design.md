@@ -153,7 +153,41 @@ Where does the crafting component's recipe repository get its recipes from? Shou
 
 I could avoid that by figuring out how to pass a resource from one to scene to another.
 
+~~How about a "PlayerSpawnPoint" node for each "level's" scene. every "level" scene has this node. When transitioning between levels, the Player node is set as a child of the PlayerSpawnPoint. 
+So the player node only moves throughout a level while in the spawn point node?~~
 
+If I was to use a relational database like SQLite, the relationship between the character and the their inventory would be many to many:
 
-How about a "PlayerSpawnPoint" node for each "level's" scene. every "level" scene has this node. When transitioning between levels, the Player node is set as a child of the PlayerSpawnPoint. 
-So the player node only moves throughout a level while in the spawn point node? 
+character table:
+
+- character id
+
+inventory slot table:
+
+- character id
+
+- ludo item id
+
+- ludo item count
+
+ludo item:
+
+- ludo item id
+
+The reason this is not a one-to-many relationship is even with single player games, there are things like shops that have inventories, and loot chest that have contents. 
+
+Dialogue is a one-to-many relationship. Only one NPC can have the same Dialogue tree. Ah, but what about a the actual dialogue options in the tree? Each option can have many dialogue branches. So it's a one-to-many relationship.
+
+Dialogue tree:
+
+-  NPC id
+
+- Dialogue tree id
+
+Dialogue option:
+
+- dialogue tree id
+
+- dialogue option id
+
+- 
