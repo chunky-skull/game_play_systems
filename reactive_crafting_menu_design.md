@@ -147,6 +147,8 @@ Player component: has the "glue" script that connects all the sub components tog
 
 - bestiary component
 
+- input component?
+
 The player component is it's own scene, and a child scene of the level the player is in. 
 
 Where does the crafting component's recipe repository get its recipes from? Should the recipe repository be an auto-loaded singleton? And should the inventory's item repository be one also?
@@ -164,7 +166,7 @@ character table:
 
 inventory slot table:
 
-- character id
+- owner id = character id, or store id, or loot box id
 
 - ludo item id
 
@@ -180,14 +182,14 @@ Dialogue is a one-to-many relationship. Only one NPC can have the same Dialogue 
 
 Dialogue tree:
 
--  NPC id
+- dialogue node id
 
-- Dialogue tree id
+- parent dialogue node id
 
-Dialogue option:
+- dialogue text
 
-- dialogue tree id
+NPC:
 
-- dialogue option id
+- NPC id
 
-- 
+- Dialogue tree id = the dialogue node that has a "null" parent dialogue node id field. 
