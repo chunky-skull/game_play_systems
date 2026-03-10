@@ -180,16 +180,64 @@ The reason this is not a one-to-many relationship is even with single player gam
 
 Dialogue is a one-to-many relationship. Only one NPC can have the same Dialogue tree. Ah, but what about a the actual dialogue options in the tree? Each option can have many dialogue branches. So it's a one-to-many relationship.
 
+Every dialogue option has one dialogue response. Each dialogue response can have multiple options. 
+
 Dialogue tree:
 
 - dialogue node id
 
 - parent dialogue node id
 
-- dialogue text
+- dialogue option text
+
+- dialogue text id = is this another dialogue tree node, or a whole separate database?  better to just make the text apart of the node? while the same dialogue response can be accessed multiple times, the dialogue option to get that response shouldn't change. 
+
+- dialogue response text: All the options for this response will have this node's dialogue node id as their parent node id
 
 NPC:
 
 - NPC id
 
 - Dialogue tree id = the dialogue node that has a "null" parent dialogue node id field. 
+
+Okay, so how about the bestiary and its entries? It's a one-to-many relationship, where there is only one "one.'' So really just a database table with no relational id's. But how would I mark which entries are in the player's bestiary? a Boolean value on each row? Or do I have the game add entries as the player plays? I don't like that because then the data is scattered throughout the game.  
+
+bestiary:
+
+- entry id
+
+- description
+
+- model path or filename
+
+- visible = Boolean value that indicates if the entry is in the player's bestiary
+
+How about crafting recipes? similar to the inventory. While the majority of them will be in the player's recipe book, there will be some that other game entities will own. 
+
+crafting menu: A join table that connects a game entity with their crafting recipes
+
+- owner id
+
+- recipe id
+
+crafting recipe book:
+
+- recipe id
+
+- output item id
+
+- recipe label
+
+- recipe description
+
+ludo item:
+
+- ludo item id
+
+ingredient: A join table that connects ingredients with recipes
+
+- ingredient id
+
+- ludo item id
+
+- recipe id
