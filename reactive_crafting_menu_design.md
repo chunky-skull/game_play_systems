@@ -175,6 +175,7 @@ inventory slot table:
 ludo item:
 
 - ludo item id
+- etc
 
 The reason this is not a one-to-many relationship is even with single player games, there are things like shops that have inventories, and loot chest that have contents. 
 
@@ -212,13 +213,13 @@ bestiary:
 
 - visible = Boolean value that indicates if the entry is in the player's bestiary
 
-How about crafting recipes? similar to the inventory. While the majority of them will be in the player's recipe book, there will be some that other game entities will own. 
+How about crafting recipes? similar to the inventory. While the majority of them will be in the player's recipe book, there will be some that other game entities will own. The game will use it's own logic to determine if a recipe is available to make for the player.
 
-crafting menu: A join table that connects a game entity with their crafting recipes
+~~crafting menu: A join table that connects a game entity with their crafting recipes~~
 
-- owner id
+- ~~owner id~~
 
-- recipe id
+- ~~recipe id~~
 
 crafting recipe book:
 
@@ -230,9 +231,12 @@ crafting recipe book:
 
 - recipe description
 
+- visible = Boolean value that indicates if the recipe is in the player's recipe book
+
 ludo item:
 
 - ludo item id
+- etc
 
 ingredient: A join table that connects ingredients with recipes
 
@@ -241,3 +245,25 @@ ingredient: A join table that connects ingredients with recipes
 - ludo item id
 
 - recipe id
+
+## Save Game
+
+Rather than having to make database calls each time the player's inventory, crafting menu, or bestiary changes, I can have those changes committed to the database when the player's game is saved. The game gets all of the player's data when the game loads.
+
+I could set up the save-game component to simply commit the player's data to the database. Then I could easily set up "glue" scripts for the functionality the game design requires. If the game needs to have save at checkpoints, the checkpoint scripts uses the save-game component. If it needs to save between levels, the level transition script or component uses the save-game component.
+
+Save-game component:
+
+- database component
+
+- needs access to:
+  
+  - inventory component
+  
+  - crafting recipe book component
+  
+  - character corpus (or attributes) component
+  
+  - bestiary component
+
+How do decouple the save-game component from needing to know the specifics of each relevant database? Maybe each relevant component has a piece of its own database update/save calls?
