@@ -149,6 +149,12 @@ Player component: has the "glue" script that connects all the sub components tog
 
 - input component?
 
+- pause menu component:
+  
+  - save component
+  
+  - load component
+
 The player component is it's own scene, and a child scene of the level the player is in. 
 
 Where does the crafting component's recipe repository get its recipes from? Should the recipe repository be an auto-loaded singleton? And should the inventory's item repository be one also?
@@ -157,6 +163,10 @@ I could avoid that by figuring out how to pass a resource from one to scene to a
 
 ~~How about a "PlayerSpawnPoint" node for each "level's" scene. every "level" scene has this node. When transitioning between levels, the Player node is set as a child of the PlayerSpawnPoint. 
 So the player node only moves throughout a level while in the spawn point node?~~
+
+## Relational Database Structure
+
+### Inventory
 
 If I was to use a relational database like SQLite, the relationship between the character and the their inventory would be many to many:
 
@@ -177,7 +187,9 @@ ludo item:
 - ludo item id
 - etc
 
-The reason this is not a one-to-many relationship is even with single player games, there are things like shops that have inventories, and loot chest that have contents. 
+The reason this is not a one-to-many relationship is even with single player games, there are things like shops that have inventories, and loot chest that have contents.
+
+### Dialogue
 
 Dialogue is a one-to-many relationship. Only one NPC can have the same Dialogue tree. Ah, but what about a the actual dialogue options in the tree? Each option can have many dialogue branches. So it's a one-to-many relationship.
 
@@ -191,7 +203,7 @@ Dialogue tree:
 
 - dialogue option text
 
-- dialogue text id = is this another dialogue tree node, or a whole separate database?  better to just make the text apart of the node? while the same dialogue response can be accessed multiple times, the dialogue option to get that response shouldn't change. 
+- ~~dialogue text id = is this another dialogue tree node, or a whole separate database?  better to just make the text apart of the node? while the same dialogue response can be accessed multiple times, the dialogue option to get that response shouldn't change.~~
 
 - dialogue response text: All the options for this response will have this node's dialogue node id as their parent node id
 
@@ -199,7 +211,11 @@ NPC:
 
 - NPC id
 
-- Dialogue tree id = the dialogue node that has a "null" parent dialogue node id field. 
+- Dialogue tree id = the dialogue node that has a "null" parent dialogue node id field.
+
+How do I keep track of expended dialogue options?
+
+### Bestiary
 
 Okay, so how about the bestiary and its entries? It's a one-to-many relationship, where there is only one "one.'' So really just a database table with no relational id's. But how would I mark which entries are in the player's bestiary? a Boolean value on each row? Or do I have the game add entries as the player plays? I don't like that because then the data is scattered throughout the game.  
 
@@ -258,12 +274,36 @@ Save-game component:
 
 - needs access to:
   
-  - inventory component
+  - inventory component's database update query
   
-  - crafting recipe book component
+  - crafting recipe book component's database update query
   
-  - character corpus (or attributes) component
+  - character corpus (or attributes) component's database update query
   
-  - bestiary component
+  - bestiary component's database update query
 
-How do decouple the save-game component from needing to know the specifics of each relevant database? Maybe each relevant component has a piece of its own database update/save calls?
+How do decouple the save-game component from needing to know the specifics of each relevant database? Maybe each relevant component has a piece of its own database update/save calls? Better, there is a specific save component for each relevant component. So for the inventory database there is an inventory save component. For the bestiary database there is a bestiary save component. The same goes for loading. 
+
+The save component can also check if a specific save component needs to be called at all.
+
+Save-game component:
+
+- inventory save component
+
+- bestiary save component
+
+- crafting recipe book save component
+
+- character attributes save component
+
+There will also be higher level save-game component that handles saving the game world. It would be structured similarly.
+
+Save game world component ( come up with a better name ):
+
+- save enemies
+
+- save NPCs
+
+- save loot placement
+
+The loading component is nearly a mirror of this structure. One difference being that it does not need to check if something needs to be loaded. If it's child loading component, it gets loaded into the game. It would also need to reset the whole game to the point the player has loaded. So it may not be part of the player component, but part of the game component. 
