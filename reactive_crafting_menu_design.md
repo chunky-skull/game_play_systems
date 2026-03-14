@@ -147,13 +147,15 @@ Player component: has the "glue" script that connects all the sub components tog
 
 - bestiary component
 
-- input component?
+- input component
 
-- pause menu component:
+- - save inventory
   
-  - save component
+  - save crafting recipe book
   
-  - load component
+  - save bestiary
+  
+  - save character attributes
 
 The player component is it's own scene, and a child scene of the level the player is in. 
 
@@ -302,8 +304,20 @@ Save game world component ( come up with a better name ):
 
 - save enemies
 
-- save NPCs
+- save NPCs. These will work with groups to save all the like entities at once
 
 - save loot placement
 
 The loading component is nearly a mirror of this structure. One difference being that it does not need to check if something needs to be loaded. If it's child loading component, it gets loaded into the game. It would also need to reset the whole game to the point the player has loaded. So it may not be part of the player component, but part of the game component. 
+
+### Pause menu
+
+The pause menu input will be part of the player component's input component. The player component will have the journal, equipment, and inventory menu, aka the ludo menu. The game will have the pause menu component. The pause menu will handle saving, loading, options, and quit components.
+
+When the player makes a pause menu, the player component emits a "pause" signal. The game will have a function that pauses the game and opens the pause menu connected to that signal.
+
+### Interactive objects
+
+An interactive object will work with the game and player components. It will work using the same pattern as the inventory and crafting components. The game will connect the player component's input component with the interactive object's interactive component. 
+
+An interactive component will connect to a collision shape's "body_entered/exited" signals. It will check if the "body" is the player component and emit "player_entered/exited" signals. These signals returns lambda function that "activates" and "deactivates" the interactive component. On "player_entered" the game connects the activate function with the player component's input component's "interact" signal. On "player_exited" the game calls the deactivate lambda and disconnects the interact signal from the activate function.
