@@ -320,4 +320,8 @@ When the player makes a pause menu, the player component emits a "pause" signal.
 
 An interactive object will work with the game and player components. It will work using the same pattern as the inventory and crafting components. The game will connect the player component's input component with the interactive object's interactive component. 
 
-An interactive component will connect to a collision shape's "body_entered/exited" signals. It will check if the "body" is the player component and emit "player_entered/exited" signals. These signals returns lambda function that "activates" and "deactivates" the interactive component. On "player_entered" the game connects the activate function with the player component's input component's "interact" signal. On "player_exited" the game calls the deactivate lambda and disconnects the interact signal from the activate function.
+An interactive component will connect to a collision shape's "body_entered/exited" signals. It will check if the "body" is the player component and emit "player_entered/exited" signals. These signals return lambda functions that "activates" and "deactivates" the interactive component. On "player_entered" the game connects the activate function with the player's input component's "interact" signal. On "player_exited" the game calls the deactivate lambda and disconnects the interact signal from the activate function.
+
+I should figure what to call the pattern of having a parent component connecting child component signals. 
+
+I can cull enemies by using enemy spawn points.
