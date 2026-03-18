@@ -325,3 +325,9 @@ An interactive component will connect to a collision shape's "body_entered/exite
 I should figure what to call the pattern of having a parent component connecting child component signals. 
 
 I can cull enemies by using enemy spawn points.
+
+How will keys, both generic and specific, work? I like Lunacid's approach: The player needs to equip the key in an item slot and use it when by a locked door. This avoids the need to loop there an inventory to ensure the player has a key.
+
+I could also do something similar to crafting ingredients. There would be a helper or "glue" component that connects to the inventory's "item_added/removed" signals. This component checks if the item is a key. The it sends the map component a "key_added/removed" signal. The map component then sends something like an "unlockable" signal to all the doors that unlock with generic keys on "key_added." The helper component can also check if the added key is a specific key and send "specific_key_added/removed" signals.
+
+How will loot in chest and defeated enemies work?
