@@ -326,8 +326,18 @@ I should figure what to call the pattern of having a parent component connecting
 
 I can cull enemies by using enemy spawn points.
 
+### Generic and Specific Keys and Doors
+
 How will keys, both generic and specific, work? I like Lunacid's approach: The player needs to equip the key in an item slot and use it when by a locked door. This avoids the need to loop there an inventory to ensure the player has a key.
 
-I could also do something similar to crafting ingredients. There would be a helper or "glue" component that connects to the inventory's "item_added/removed" signals. This component checks if the item is a key. The it sends the map component a "key_added/removed" signal. The map component then sends something like an "unlockable" signal to all the doors that unlock with generic keys on "key_added." The helper component can also check if the added key is a specific key and send "specific_key_added/removed" signals.
+I could also do something similar to crafting ingredients. There would be a helper or "glue" component that connects to the inventory's "item_added/removed" signals. This component checks if the item is a key. If so, it emits "generic_key_available" signal, and increments a generic_key_count variable. On "item_removed," The component checks if the item is a generic key and decrements the generic_key_count if so. If that variable equals zero, the component emits a "generic_key_unavailable" signal.
 
-How will loot in chest and defeated enemies work?
+The map component or one of its child components, doors component most like, then sends something like an "unlock-able" signal to all the doors that unlock with generic keys on "generic_key_available." On "generic_key_unavailable," the doors component emits something like "locked." When the player opens a generic or specific door, in it's "unlock-able" state, the door's script disconnects from the doors component's "unlock-able" and "lock" signals. 
+
+The helper component can also check if the added key is a specific key and send "specific_key_available" signals. This signals provides an door id. Specific keys can not be dropped. The component does not keep a count of specific keys available, and there is not "specific_key_unavailable" signal. 
+
+This pattern adds a conditional to the inventory's "item_added/removed" signals. 
+
+### Loot drops and placement
+
+How will loot in chest and defeated enemies work
