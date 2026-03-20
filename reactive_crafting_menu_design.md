@@ -336,8 +336,20 @@ The map component or one of its child components, doors component most like, the
 
 The helper component can also check if the added key is a specific key and send "specific_key_available" signals. This signals provides an door id. Specific keys can not be dropped. The component does not keep a count of specific keys available, and there is not "specific_key_unavailable" signal. 
 
-This pattern adds a conditional to the inventory's "item_added/removed" signals. 
+This pattern adds a conditional to the inventory's "item_added/removed" signals. This pattern also works for locked loot chest.
+
+How does the map save which generic and specific doors have been unlocked? Do doors have a table in the database? They could have a "locked" Boolean field. And a "map_id" field. In game doors are connected to the database doors by the database doors' id.
+
+Or this might be a better case for Godot's custom resources. Locked doors could be a custom resource that have a Boolean property called "locked," and another called "unlock-able." The code for unlocking a door is really only ever run once, when the player ✨unlocks✨ the door. Maybe in unlocking the door, the door's script some how turns the door from a one that needs a key to open, to a door that can just be open.
+
+How?
 
 ### Loot drops and placement
 
-How will loot in chest and defeated enemies work
+How will loot in chest and defeated enemies work?
+
+### Development Environment
+
+Rather than start with character movement or level building, I could test out must of the systems described above with 2D menus. 
+
+How? 
