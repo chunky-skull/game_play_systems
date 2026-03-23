@@ -340,16 +340,26 @@ This pattern adds a conditional to the inventory's "item_added/removed" signals.
 
 How does the map save which generic and specific doors have been unlocked? Do doors have a table in the database? They could have a "locked" Boolean field. And a "map_id" field. In game doors are connected to the database doors by the database doors' id.
 
-Or this might be a better case for Godot's custom resources. Locked doors could be a custom resource that have a Boolean property called "locked," and another called "unlock-able." The code for unlocking a door is really only ever run once, when the player ✨unlocks✨ the door. Maybe in unlocking the door, the door's script some how turns the door from a one that needs a key to open, to a door that can just be open.
+Or this might be a better case for Godot's custom resources. Locked doors could be a custom resource that have a Boolean property called "locked," and another called "can_unlock." The code for unlocking a door is only ever run once, when the player ✨unlocks✨ the door. Maybe in unlocking the door, the door's script some how turns the door from '' one that needs a key to open, to a door that can just be open.
 
-How?
+How? Maybe I can add an "open" property that holds a lambda. For locked doors, this function checks the "unlock-able" Boolean property. If so, the/a key is removed from inventory, "open" is set to a new function that opens the door, a "door_opened" signal is emitted, and "open" is called. Else, "locked" method is called. The lock method may emit a "locked" signal.
+
+I can use groups to get all the generic key doors and specific key doors.
 
 ### Loot drops and placement
 
-How will loot in chest and defeated enemies work?
+How will loot in chest and defeated enemies work? 
+
+Is loot a type of inventory? Depends. Loot chest have a corresponding database entry like an inventory, but it doesn't make sense that an enemy's loot drop would have one. Loot chest are static. Enemies are not. What about items the player can find on the ground? My instinct says no. But if that's the case then why should the statically place loot chest be any different? 
+
+An loot item on the map would be a node. This node would need to remove its self in such a way that when the player leaves and re-enters the map, the loot item does not get loaded back into the map. How?
+
+#### Enemy Loot Drops
+
+Random loot drops for enemy can be done with an array of item ids. With the built in function "randi(array.length())" I can get a random index from the item id array. 
 
 ### Development Environment
 
-Rather than start with character movement or level building, I could test out must of the systems described above with 2D menus. 
+ Rather than start with character movement or level building, I could test out must of the systems described above with 2D menus. 
 
 How? 
