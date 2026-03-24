@@ -352,7 +352,9 @@ How will loot in chest and defeated enemies work?
 
 Is loot a type of inventory? Depends. Loot chest have a corresponding database entry like an inventory, but it doesn't make sense that an enemy's loot drop would have one. Loot chest are static. Enemies are not. What about items the player can find on the ground? My instinct says no. But if that's the case then why should the statically place loot chest be any different? 
 
-An loot item on the map would be a node. This node would need to remove its self in such a way that when the player leaves and re-enters the map, the loot item does not get loaded back into the map. How?
+An loot item on the map would be a node. This node would need to remove its self in such a way that when the player leaves and re-enters the map, the loot item does not get loaded back into the map. How? I don't know where to even start. I think I would need to make loot placement dynamic somehow. Like when the map is loaded it checks some sort of data to determine where items are placed. 
+
+Working with loot in this way is abstracted to the player. They interact with a corpse or a chest and a menu appears that allows them to select what loot makes it into their inventory. What if the loot where actual in game models that player has to interact with to put into an inventory? Something in the vein of "Monomyth," but maybe not so involved. Like "Tainted Grail" where the player can walk near an item and be prompted to pick the item up, or the player can walk near an enemy and be given a menu to add that same item to their inventory. I also think of another CRPG where when the player dies all of their items seemingly explode out of the player and cover the floor around them. Maybe something similar happens to a downed enemy. The one draw back is it might be kinda of annoying to need to run around to collect items.   
 
 #### Enemy Loot Drops
 
