@@ -48,9 +48,7 @@ That is one loop with no nested loops. However, it is one loop that each craftin
 
 To implement this I would need to change how reactive data works. Rather than the parent data being broadcast with each change, I would need to it up to broadcast the child data affected by the change. This functionality should be specific to how the character's inventory works. This system could also work for quest and progression items.  
 
-Maybe I don need to change the implementation of the reactive data, but instead I can simply write the inventory to have this functionality. So the inventory emits a "item_subtracted" and "item_added" signal. Quest trackers and crafting menus connect to the signal with logic that decides what to do with the added or subtracted item. I am no longer certain that the reactive data type is needed for this use case. 
-
-⭐
+Maybe I don need to change the implementation of the reactive data, but instead I can simply write the inventory to have this functionality. So the inventory emits a "item_subtracted" and "item_added" signal. Quest trackers and crafting menus connect to the signal with logic that decides what to do with the added or subtracted item. I am no longer certain that the reactive data type is needed for this use case.⭐
 
 ~~To make the above described system work, I need to make the inventory data and controller an auto-loaded singleton. The problem is how to I keep this singleton from becoming a giant file. Also I like being able to create items and set up variables in the editor. I clearly need to learn more about what I can do with a singleton in Godot.~~
 
@@ -352,15 +350,15 @@ How will loot in chest and defeated enemies work?
 
 Is loot a type of inventory? Depends. Loot chest have a corresponding database entry like an inventory, but it doesn't make sense that an enemy's loot drop would have one. Loot chest are static. Enemies are not. What about items the player can find on the ground? My instinct says no. But if that's the case then why should the statically place loot chest be any different? 
 
-A loot item on the map would be a node. This node would need to remove its self in such a way that when the player leaves and re-enters the map, the loot item does not get loaded back into the map. How? I don't know where to even start. I think I would need to make loot placement dynamic somehow. Like when the map is loaded it checks some sort of data to determine where items are placed. Does the map check a database table? I could set it up like the inventory, but how would the map know where to put each item? Also how many items could there be placed on the map?
-
-In "Lunacid," everything only drops or has one item. Loot chest are diegetic and only contain a single item. Enemies only drop a single item. When the play finds loot on the map, it almost always a single item. I like this design pattern. While it seems like loot chest "have" an item, its more like finding items on the ground or in the environment. And when an enemy is defeated it spawns loot into the map, but that spawn does not need to be added to the map's, or level's, state. The only items that are kept in state are items on the map. How does the state track when the player picks up an item from the map?
-
-When a save is loaded, the maps should not load items that the player has taken. Maybe a map's state has a linked list of all the items on the it. When the player picks an item up, that item is removed from the map's list. When the map state gets serialized for a save, its data does not include the taken item. A map item's state could be called something like "item_spawn_point." It would include a reference to the item, most likely an ID, and the item's location on the map.
-
 Working with loot in this way is abstracted to the player. They interact with a corpse or a chest and a menu appears that allows them to select what loot makes it into their inventory. What if the loot where actual in game models that player has to interact with to put into an inventory? Something in the vein of "Monomyth," but maybe not so involved. Like "Tainted Grail" where the player can walk near an item and be prompted to pick the item up, or the player can walk near an enemy and be given a menu to add that same item to their inventory. I also think of another CRPG where when the player dies all of their items seemingly explode out of the player and cover the floor around them. Maybe something similar happens to a downed enemy. The one draw back is it might be kind of annoying to need to run around to collect items. "Lunacid" gets around this annoyance by having enemies and loot chest drop only one item.
 
-Again, I like "Lunacid's" approach the most. 
+Again, I like "Lunacid's" approach the most.
+
+✨A loot item on the map would be a node. This node would need to remove its self in such a way that when the player leaves and re-enters the map, the loot item does not get loaded back into the map. How? I don't know where to even start. I think I would need to make loot placement dynamic somehow. Like when the map is loaded it checks some sort of data to determine where items are placed. Does the map check a database table? I could set it up like the inventory, but how would the map know where to put each item? Also how many items could there be placed on the map?
+
+In "Lunacid," everything only drops or has one item. Loot chest are diegetic and only contain a single item. Enemies only drop a single item. When the player finds loot on the map, it almost always a single item. I like this design pattern. While it seems like loot chest "have" an item, its more like finding items on the ground or in the environment. And when an enemy is defeated it spawns loot into the map, but that spawn does not need to be added to the map's, or level's, state. The only items that are kept in state are items on the map. How does the state track when the player picks up an item from the map?
+
+When a save is loaded, the maps should not load items that the player has taken. Maybe a map's state has a linked list of all the items on the it. When the player picks an item up, that item is removed from the map's list. When the map state gets serialized for a save, its data does not include the taken item. A map item's state could be called something like "item_spawn_point." It would include a reference to the item, most likely an ID, and the item's location on the map. During game play each on map item's data, aside from enemy drops as they do not persist, will be stored in a node in the linked list mention earlier.✨
 
 ### Enemy Loot Drops
 
@@ -372,16 +370,28 @@ Rather than start with character movement or level building, I could test out mu
 
 How? 
 
+1. Set up a connection to a database, SQLite
+
+2. Set up a database and table naming convention that uses a unique prefix. Starting a new game file generates this prefix.
+
 ### Inventory
 
+1. Write a script that connects to the database and creates character, inventory, and ludo_item tables.
 
+2. Write a script that holds the in game data for the character's inventory, i.e. a linked list.
+
+3. create a button that represents an item being picked up and potentially added to inventory. 
+
+4. Check if the item can fit into the "player's" inventory.
+   
+   1. add reject functionality
+   
+   2. add accept functionality that adds the item to the linked list
+
+5. Write a script that saves the linked list's data to the SQLite's inventory table.
 
 ### Crafting
 
-
-
 ### Saving and Loading
-
-
 
 ### Opening Locked Doors
