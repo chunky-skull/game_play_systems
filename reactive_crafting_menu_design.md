@@ -376,6 +376,8 @@ How?
 
 ### Inventory
 
+Done =
+
 1. Write a script that connects to the database and creates character, inventory, and ludo_item tables.
 
 2. Write a script that holds the in game data for the character's inventory, i.e. a linked list.
@@ -388,10 +390,24 @@ How?
    
    2. add accept functionality that adds the item to the linked list
 
-5. Write a script that saves the linked list's data to the SQLite's inventory table.
+5. Create a UI for the inventory that lists items within the inventory and with buttons to use, view, equip, and drop items. 
+
+6. Write a script that gives those buttons the relevant functionality.
+
+7. Write a script that saves the linked list's data to the SQLite's inventory table.
+
+8. Write a script that loads the SQLite's inventory table data to the linked list.
+
+9. Connect step seven's and eight's scripts to buttons
 
 ### Crafting
 
+Done =
+
 ### Saving and Loading
 
+Done =
+
 ### Opening Locked Doors
+
+Done =
