@@ -376,7 +376,7 @@ How?
 
 ### Inventory
 
-Done =
+Done = I can: pick up and item; potential get a warning if the item over encumbers the character; add that item to the character's inventory; open the character's inventory menu; "use," "equip," and drop an item from the inventory; And save and load the inventory's data.
 
 1. Write a script that connects to the database and creates character, inventory, and ludo_item tables.
 
@@ -402,7 +402,7 @@ Done =
 
 ### Crafting
 
-Done =
+Done = when I open the crafting menu, it shows me which recipes I have the ingredients to make;
 
 ### Saving and Loading
 
