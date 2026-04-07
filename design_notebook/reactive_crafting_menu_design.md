@@ -363,5 +363,3 @@ When a save is loaded, the maps should not load items that the player has taken.
 ### Enemy Loot Drops
 
 Random loot drops for enemy can be done with an array of item ids. With the built in function "randi(array.length())" I can get a random index from the item id array. 
-
-# 
