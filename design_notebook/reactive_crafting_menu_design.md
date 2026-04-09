@@ -56,6 +56,8 @@ Maybe I don need to change the implementation of the reactive data, but instead 
 
 ~~There is the database, SQLite. Scripts get data from the db. In the case of the inventory system and the crafting system, how does the crafting menu connect each crafting recipe to the inventory's "ingredient_added/removed" signals?~~
 
+## Crafting Mechanics
+
 the inventory component has: 
 
 - the item_repository, a linked list that extends resource and uses a slot datatype to store an item's data and count. 
@@ -94,15 +96,15 @@ The crafting component has:
 
 I need some sort of "glue" script:
 
-- that connects to the crafting component's "recipe_added" signal. 
-  
-  - when that signal emits, the scripts connects its own "ingredient_added/removed" signals to the recipe's set_enabled_by_ingredient method
+1. that connects to the crafting component's "recipe_added" signal. 
+   
+   - when that signal emits, the scripts connects its own "ingredient_added/removed" signals to the recipe's set_enabled_by_ingredient method
 
-- connects the inventory's "item_added/removed" signal
-  
-  - when that signal emits, the script checks if the item has the "ingredient" type and emits its ingredient_added/removed signals. 
+2. connects the inventory's "item_added/removed" signal
+   
+   - when that signal emits, the script checks if the item has the "ingredient" type and emits its ingredient_added/removed signals. 
 
-- connects the crafting component's use_recipe signal with the inventory's add_items and remove_items methods.
+3. connects the crafting component's use_recipe signal with the inventory's add_items and remove_items methods.
 
 <u>How does this script have access to both the inventory and crafting components?</u> 
 
@@ -117,7 +119,7 @@ So far the only functional options seems to be to work with some sort of singlet
 
 What part of the game has access to both the inventory and crafting components?
 
-The more I think about it, the more it makes sense to have the player component own the inventory and crafting components. The player would have all the components that relate to game play.
+✨The more I think about it, the more it makes sense to have the player component own the inventory and crafting components. The player would have all the components that relate to game play.✨
 
 Player component: has the "glue" script that connects all the sub components together
 
@@ -163,104 +165,6 @@ I could avoid that by figuring out how to pass a resource from one to scene to a
 
 ~~How about a "PlayerSpawnPoint" node for each "level's" scene. every "level" scene has this node. When transitioning between levels, the Player node is set as a child of the PlayerSpawnPoint. 
 So the player node only moves throughout a level while in the spawn point node?~~
-
-## Relational Database Structure
-
-### Inventory
-
-If I was to use a relational database like SQLite, the relationship between the character and the their inventory would be many to many:
-
-character table:
-
-- character id
-
-inventory slot table:
-
-- owner id = character id, or store id, or loot box id
-
-- ludo item id
-
-- ludo item count
-
-ludo item:
-
-- ludo item id
-- etc
-
-The reason this is not a one-to-many relationship is even with single player games, there are things like shops that have inventories, and loot chest that have contents.
-
-### Dialogue
-
-Dialogue is a one-to-many relationship. Only one NPC can have the same Dialogue tree. Ah, but what about a the actual dialogue options in the tree? Each option can have many dialogue branches. So it's a one-to-many relationship.
-
-Every dialogue option has one dialogue response. Each dialogue response can have multiple options. 
-
-Dialogue tree:
-
-- dialogue node id
-
-- parent dialogue node id
-
-- dialogue option text
-
-- ~~dialogue text id = is this another dialogue tree node, or a whole separate database?  better to just make the text apart of the node? while the same dialogue response can be accessed multiple times, the dialogue option to get that response shouldn't change.~~
-
-- dialogue response text: All the options for this response will have this node's dialogue node id as their parent node id
-
-NPC:
-
-- NPC id
-
-- Dialogue tree id = the dialogue node that has a "null" parent dialogue node id field.
-
-How do I keep track of expended dialogue options?
-
-### Bestiary
-
-Okay, so how about the bestiary and its entries? It's a one-to-many relationship, where there is only one "one.'' So really just a database table with no relational id's. But how would I mark which entries are in the player's bestiary? a Boolean value on each row? Or do I have the game add entries as the player plays? I don't like that because then the data is scattered throughout the game.  
-
-bestiary:
-
-- entry id
-
-- description
-
-- model path or filename
-
-- visible = Boolean value that indicates if the entry is in the player's bestiary
-
-How about crafting recipes? similar to the inventory. While the majority of them will be in the player's recipe book, there will be some that other game entities will own. The game will use it's own logic to determine if a recipe is available to make for the player.
-
-~~crafting menu: A join table that connects a game entity with their crafting recipes~~
-
-- ~~owner id~~
-
-- ~~recipe id~~
-
-crafting recipe book:
-
-- recipe id
-
-- output item id
-
-- recipe label
-
-- recipe description
-
-- visible = Boolean value that indicates if the recipe is in the player's recipe book
-
-ludo item:
-
-- ludo item id
-- etc
-
-ingredient: A join table that connects ingredients with recipes
-
-- ingredient id
-
-- ludo item id
-
-- recipe id
 
 ## Save Game
 
