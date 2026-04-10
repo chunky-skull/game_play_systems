@@ -8,6 +8,16 @@ How?
 
 2. Set up a database and table naming convention that uses a unique prefix. Starting a new game file generates this prefix.
 
+## Set up
+
+Done =
+
+1. Create a player component that is its own scene
+
+2. Create a game component that is its own scene
+
+3. Instantiate the player component as a child of that scene
+
 ## Inventory
 
 Done = I can: pick up and item; potential get a warning if the item over encumbers the character; add that item to the character's inventory; open the character's inventory menu; "use," "equip," and drop an item from the inventory; And save and load the inventory's data.
@@ -78,7 +88,7 @@ Done = when I open the crafting menu, it shows me which recipes I have the ingre
    
    4. A "recipe_added" signal that provides the new recipe.
 
-5. create a "glue" component that connects the inventory's signals with the crafting component and vice versa:
+5. create a "glue" component that connects the inventory's signals with the crafting component and vice versa: This "glue" component is the player component.
    
    1. Connects to the crafting component's "recipe_added" signal.
       
@@ -94,11 +104,33 @@ Done = when I open the crafting menu, it shows me which recipes I have the ingre
 
 Done =
 
+An interactive object will work with the game and player components. It will work using the same pattern as the inventory and crafting components. The game will connect the player component's input component with the interactive object's interactive component.
+
+An interactive component will connect to a collision shape's "body_entered/exited" signals. It will check if the "body" is the player component and emit "player_entered/exited" signals. These signals return lambda functions that "activates" and "deactivates" the interactive component. On "player_entered" the game connects the activate function with the player's input component's "interact" signal. On "player_exited" the game calls the deactivate lambda and disconnects the interact signal from the activate function.
+
+I should figure what to call the pattern of having a parent component connecting child component signals.
+
+1. Create the player's input component:
+   
+   1. Capture inputs.
+   
+   2. Check if input is the interact input.
+   
+   3. Emit "interact_input" signal.
+
+2. Create an interactive component:
+   
+   1. Has multiple signals:
+      
+      1. player_entered which provides a lambda function that "activates" the component
+      
+      2. player_exited which provides a lambda function that "deactivates" the component
+
+3. Create
+
 ## Dialogue
 
 Done = I can navigate a dialogue tree by selecting from multiple answers. Reaching certain points in the tree and selecting a specific answer adds an item to the character's inventory. 
-
-
 
 Dialogue is a one-to-many relationship. Only one NPC can have the same Dialogue tree. Ah, but what about a the actual dialogue options in the tree? Each option can have many dialogue branches. So it's a one-to-many relationship.
 
@@ -124,7 +156,7 @@ NPC:
 
 How do I keep track of expended dialogue options?
 
-
+## Quests/Missions
 
 ## Saving and Loading
 
