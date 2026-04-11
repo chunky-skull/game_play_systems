@@ -14,9 +14,11 @@ Done =
 
 1. Create a player component that is its own scene
 
-2. Create a game component that is its own scene
+2. Create a character component that is a child of the player component
 
-3. Instantiate the player component as a child of that scene
+3. Create a game component that is its own scene
+
+4. Instantiate the player component as a child of that scene
 
 ## Inventory
 
@@ -122,11 +124,19 @@ I should figure what to call the pattern of having a parent component connecting
    
    1. Has multiple signals:
       
-      1. player_entered which provides a lambda function that "activates" the component
+      1. character_entered which provides a lambda function that "activates" the component
       
-      2. player_exited which provides a lambda function that "deactivates" the component
+      2. character_exited which provides a lambda function that "deactivates" the component
+   
+   2. has a collision shape child node
+   
+   3. connect the interactive component with the collision shape's "body_entered/exited" signal:
+      
+      1. check if the body is the character and emit "character_entered/exited" signals
 
-3. Create
+3. Forward the input component's "interact_input" signal through the player componet.
+
+4. connect the player component's "interact_input" with the 
 
 ## Dialogue
 
