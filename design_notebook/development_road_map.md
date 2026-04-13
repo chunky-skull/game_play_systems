@@ -104,13 +104,7 @@ Done = when I open the crafting menu, it shows me which recipes I have the ingre
 
 ## In Game Interactions
 
-Done =
-
-An interactive object will work with the game and player components. It will work using the same pattern as the inventory and crafting components. The game will connect the player component's input component with the interactive object's interactive component.
-
-An interactive component will connect to a collision shape's "body_entered/exited" signals. It will check if the "body" is the player component and emit "player_entered/exited" signals. These signals return lambda functions that "activates" and "deactivates" the interactive component. On "player_entered" the game connects the activate function with the player's input component's "interact" signal. On "player_exited" the game calls the deactivate lambda and disconnects the interact signal from the activate function.
-
-I should figure what to call the pattern of having a parent component connecting child component signals.
+Done = When I can press the interaction key, and have 
 
 1. Create the player's input component:
    
@@ -134,9 +128,17 @@ I should figure what to call the pattern of having a parent component connecting
       
       1. check if the body is the character and emit "character_entered/exited" signals
 
-3. Forward the input component's "interact_input" signal through the player componet.
+3. Forward the input component's "interact_input" signal through the player component.
 
-4. connect the player component's "interact_input" with the 
+4. The game component connects:
+   
+   1. the player component's "interact_input" with the interactive component's "character_entered" signal's product. This product is an "activate" method
+   
+   2. To the interactive component's "character_exited" signal. When the signal is emitted:
+      
+      1.  the game component calls the method the signal returns. 
+      
+      2. Disconnects the "activate" method from the player component's "interact_input" signal.
 
 ## Dialogue
 
