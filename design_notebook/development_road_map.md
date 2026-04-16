@@ -4,7 +4,7 @@ Rather than start with character movement or level building, I could test out mu
 
 How?
 
-1. Set up a connection to a database, SQLite
+1. Set up a connection to a database, SQLite.
 
 2. Set up a database and table naming convention that uses a unique prefix. Starting a new game file generates this prefix.
 
@@ -12,13 +12,13 @@ How?
 
 Done =
 
-1. Create a player component that is its own scene
+1. Create a player component that is its own scene.
 
-2. Create a character component that is a child of the player component
+2. Create a character component that is a child of the player component, and is its own scene.
 
 3. Create a game component that is its own scene
 
-4. Instantiate the player component as a child of that scene
+4. Instantiate the player component as a child of the game component scene.
 
 ## Inventory
 
@@ -102,6 +102,20 @@ Done = when I open the crafting menu, it shows me which recipes I have the ingre
    
    3. Connects the crafting component's use_recipe signal with the inventory's add_items and remove_items methods
 
+6. Create a UI that abstracts a player working with a crafting menu:
+   
+   1. Give it an element to show which crafting recipe a player has selected:
+      
+      1. Add a button that removes the required ingredients from the character's inventory and adds the recipe's outcome to the character's inventory
+   
+   2. A list of all crafting recipes:
+      
+      1. Give each recipe a button that allows the player to select the recipe.
+      
+      2. Disable the select button when the character does not have the ingredients to make the recipe.
+      
+      3. An indicator of which recipes the player can crafting given what's in their character's inventory.
+
 ## In Game Interactions
 
 Done = When I can press the interaction key, and have 
@@ -132,13 +146,17 @@ Done = When I can press the interaction key, and have
 
 4. The game component connects:
    
-   1. the player component's "interact_input" with the interactive component's "character_entered" signal's product. This product is an "activate" method
+   1. the player component's "interact_input" with the interactive component's "character_entered" signal's product. This product is an "activate" method.
    
    2. To the interactive component's "character_exited" signal. When the signal is emitted:
       
-      1.  the game component calls the method the signal returns. 
+      1. the game component calls the method the signal returns. 
       
       2. Disconnects the "activate" method from the player component's "interact_input" signal.
+
+5. Create a UI that abstracts a player's interaction:
+   
+   1. 
 
 ## Dialogue
 
