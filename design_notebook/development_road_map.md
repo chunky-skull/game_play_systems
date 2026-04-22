@@ -136,9 +136,9 @@ Done = When I can press the interaction key, and have
       
       2. character_exited which provides a lambda function that "deactivates" the component
    
-   2. has a collision shape child node
+   2. has an Area3D child node
    
-   3. connect the interactive component with the collision shape's "body_entered/exited" signal:
+   3. connect the interactive component with the Area3D's "body_entered/exited" signal:
       
       1. check if the body is the character and emit "character_entered/exited" signals
 
@@ -156,7 +156,12 @@ Done = When I can press the interaction key, and have
 
 5. Create a UI that abstracts a player's interaction:
    
-   1. 
+   1. A Simulation of interactive object:
+      1. Has a simulation Area3D as a child node. 
+      2. Has a simulation of a CTA. 
+      3. Has a hidden "interaction made message" that appears when an interaction is made. 
+   2. A button that simulates the character entering the interactive object's interaction zone.
+   3. A button that simulates the character leaving the interactive object's interaction zone. 
 
 ## Dialogue
 
@@ -185,6 +190,24 @@ NPC:
 - Dialogue tree id = the dialogue node that has a "null" parent dialogue node id field.
 
 How do I keep track of expended dialogue options?
+
+1. Create a UI to simulate navigating a dialogue tree with an NPC:
+   
+   1. A simulation of an NPC
+   
+   2. A Text box for dialogue to appear.
+   
+   3. A set of buttons that represent the response options the player has:
+      
+      1. Each button has label that has the text for the label.
+   
+   4. A button to initiate a dialogue tree with the simulated NPC.
+
+2. Create an NPC component:
+   
+   1. Give this component an instance of the interactive object component.
+
+3. Create a component that connect to the database component and creates the dialogue tree table and NPC table.
 
 ## Quests/Missions
 
