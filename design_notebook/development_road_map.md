@@ -118,7 +118,7 @@ Done = when I open the crafting menu, it shows me which recipes I have the ingre
 
 ## In Game Interactions
 
-Done = When I can press the interaction key, and have 
+Done = When I can press the interaction key, have a test interactive message appear, and
 
 1. Create the player's input component:
    
@@ -140,7 +140,9 @@ Done = When I can press the interaction key, and have
    
    3. connect the interactive component with the Area3D's "body_entered/exited" signal:
       
-      1. check if the body is the character and emit "character_entered/exited" signals
+      1. check if the body is the character and emit "character_entered/exited" signals.
+   
+   4. Set up an init method that allows the the "activate" and "deactivate" to be defined for specific situations.
 
 3. Forward the input component's "interact_input" signal through the player component.
 
@@ -191,7 +193,18 @@ NPC:
 
 How do I keep track of expended dialogue options?
 
-1. Create a UI to simulate navigating a dialogue tree with an NPC:
+1. Create a component that connect to the database component that creates the dialogue tree table and NPC table.
+
+2. Create an NPC component:
+   
+   1. Give this component an instance of the interactive object component.
+   2. Set the interactive object component's "activate" function to open the dialogue UI component.
+
+3. Create a dialogue ui component:
+   
+   1. Connects to the database component and gets the dialogue tree data by using the NPC's id. 
+
+4. Create a UI to simulate navigating a dialogue tree with an NPC:
    
    1. A simulation of an NPC
    
@@ -202,12 +215,6 @@ How do I keep track of expended dialogue options?
       1. Each button has label that has the text for the label.
    
    4. A button to initiate a dialogue tree with the simulated NPC.
-
-2. Create an NPC component:
-   
-   1. Give this component an instance of the interactive object component.
-
-3. Create a component that connect to the database component and creates the dialogue tree table and NPC table.
 
 ## Quests/Missions
 

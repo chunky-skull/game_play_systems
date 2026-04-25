@@ -29,6 +29,8 @@ Dialogue is a one-to-many relationship. Only one NPC can have the same Dialogue 
 
 Every dialogue option has one dialogue response. Each dialogue response can have multiple options.
 
+So each dialogue node is a dialogue response option? That means each response option has the text for the NPC's response. That means that there's a possibility that multiple entries will have the same exact NPC response. Only if I make it so. I could make each response to an option the player selects unique. 
+
 Dialogue tree:
 
 - dialogue node id
