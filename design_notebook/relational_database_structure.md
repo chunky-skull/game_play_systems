@@ -43,13 +43,17 @@ Dialogue tree:
 
 - dialogue response text: All the options for this response will have this node's dialogue node id as their parent node id
 
+- expended - a Boolean value the represents if the player has already selected this node option. 
+
 NPC:
 
 - NPC id
 
 - Dialogue tree id = the dialogue node that has a "null" parent dialogue node id field.
 
-How do I keep track of expended dialogue options?
+✨How do I keep track of expended dialogue options?✨ A Boolean field in each dialogue tree node entry?
+
+Also, how do I make it so the player receives and item or quest when they go through a particular path through a dialogue tree?
 
 ### Bestiary
 

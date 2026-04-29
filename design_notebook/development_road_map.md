@@ -169,30 +169,6 @@ Done = When I can press the interaction key, have a test interactive message app
 
 Done = I can navigate a dialogue tree by selecting from multiple answers. Reaching certain points in the tree and selecting a specific answer adds an item to the character's inventory. 
 
-Dialogue is a one-to-many relationship. Only one NPC can have the same Dialogue tree. Ah, but what about a the actual dialogue options in the tree? Each option can have many dialogue branches. So it's a one-to-many relationship.
-
-Every dialogue option has one dialogue response. Each dialogue response can have multiple options.
-
-Dialogue tree:
-
-- dialogue node id
-
-- parent dialogue node id
-
-- dialogue option text
-
-- ~~dialogue text id = is this another dialogue tree node, or a whole separate database? better to just make the text apart of the node? while the same dialogue response can be accessed multiple times, the dialogue option to get that response shouldn't change.~~
-
-- dialogue response text: All the options for this response will have this node's dialogue node id as their parent node id
-
-NPC:
-
-- NPC id
-
-- Dialogue tree id = the dialogue node that has a "null" parent dialogue node id field.
-
-How do I keep track of expended dialogue options?
-
 1. Create a component that connect to the database component that creates the dialogue tree table and NPC table.
 
 2. Create an NPC component:
@@ -203,18 +179,23 @@ How do I keep track of expended dialogue options?
 3. Create a dialogue ui component:
    
    1. Connects to the database component and gets the dialogue tree data by using the NPC's id. 
-
-4. Create a UI to simulate navigating a dialogue tree with an NPC:
    
-   1. A simulation of an NPC
-   
-   2. A Text box for dialogue to appear.
-   
-   3. A set of buttons that represent the response options the player has:
+   2. connects the dialogue tree nodes and response to UI elements:
       
-      1. Each button has label that has the text for the label.
-   
-   4. A button to initiate a dialogue tree with the simulated NPC.
+      1. Create a UI to simulate navigating a dialogue tree with an NPC:
+         
+         1. A simulation of an NPC
+         
+         2. A Text box for dialogue to appear.
+         
+         3. A set of buttons that represent the response options the player has:
+            
+            1. Each button has label that has the text for the for the response option.
+            2. when pressed:
+               1. the text in the dialogue text box when pressed.
+               2. the current dialogue tree node's expended field is set to true.
+         
+         4. A button to initiate a dialogue tree with the simulated NPC.
 
 ## Quests/Missions
 
