@@ -53,9 +53,11 @@ NPC:
 
 ✨How do I keep track of expended dialogue options?✨ A Boolean field in each dialogue tree node entry?
 
-Also, how do I make it so the player receives and item or quest when they go through a particular path through a dialogue tree? Maybe when the player reaches the terminal node in the dialogue tree, a bit of code checks if the player should receive something? That feels like I need to add more boolean fields, and therefore more conditions. Not ideal. 
+~~Also, how do I make it so the player receives and item or quest when they go through a particular path through a dialogue tree? Maybe when the player reaches the terminal node in the dialogue tree, a bit of code checks if the player should receive something? That feels like I need to add more boolean fields, and therefore more conditions. Not ideal.~~ 
 
-What about making a quest or item have a dialogue node id field. When a dialogue node is activated, a bit code checks makes a request to the database component to check if the quest or reward item tables have an entry that has a matching dialogue node id. Better, but I don't like that the code would need to make a database request for each dialogue option selected. Maybe I can flip this so that the dialogue node has an item and quest id. The code checks these fields and if they are not null, makes a request to the database component to get the corresponding entry. 
+~~What about making a quest or item have a dialogue node id field. When a dialogue node is activated, a bit code checks makes a request to the database component to check if the quest or reward item tables have an entry that has a matching dialogue node id. Better, but I don't like that the code would need to make a database request for each dialogue option selected. Maybe I can flip this so that the dialogue node has an item and quest id. The code checks these fields and if they are not null, makes a request to the database component to get the corresponding entry.~~ 
+
+✨The dialogue tree table would not keep track of which NPC gives quest or items. Instead that would be a special kind of NPC. Something like a join table that has an NPC's id, the quest's id, and potential and item's id.✨
 
 Maybe I should make a this tree a specific datatype in game. Like a Doubly Linked List, or even a node tree. 
 

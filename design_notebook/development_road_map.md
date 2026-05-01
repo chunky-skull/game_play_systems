@@ -116,6 +116,10 @@ Done = when I open the crafting menu, it shows me which recipes I have the ingre
       
       3. An indicator of which recipes the player can crafting given what's in their character's inventory.
 
+## Scanning and Adding Recipes (Schemes) to Crafting Recipes
+
+Done = I can tell when I can scan a specific item. I can scan the item, and when I do, a new recipe is added to my crafting recipe book.
+
 ## In Game Interactions
 
 Done = When I can press the interaction key, have a test interactive message appear, and
@@ -198,6 +202,12 @@ Done = I can navigate a dialogue tree by selecting from multiple answers. Reachi
          4. A button to initiate a dialogue tree with the simulated NPC.
 
 ## Quests/Missions
+
+Done =
+
+## Bestiary
+
+Done =
 
 ## Saving and Loading
 
