@@ -120,6 +120,10 @@ Done = when I open the crafting menu, it shows me which recipes I have the ingre
 
 Done = I can tell when I can scan a specific item. I can scan the item, and when I do, a new recipe is added to my crafting recipe book.
 
+1. create a component that connects to the database component and specifically access the crafting recipe book table.
+2. create a scanner component:
+   1. 
+
 ## In Game Interactions
 
 Done = When I can press the interaction key, have a test interactive message appear, and
