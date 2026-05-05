@@ -79,13 +79,13 @@ bestiary:
 
 How about crafting recipes? similar to the inventory. While the majority of them will be in the player's recipe book, there will be some that other game entities will own. The game will use it's own logic to determine if a recipe is available to make for the player.
 
-~~crafting menu: A join table that connects a game entity with their crafting recipes~~
+crafting menu: A join table that connects a game entity with their crafting recipes
 
-- ~~owner id~~
+- owner id
 
-- ~~recipe id~~
+- recipe id
 
-crafting recipe book:
+crafting recipe:
 
 - recipe id
 
@@ -95,9 +95,9 @@ crafting recipe book:
 
 - recipe description
 
-- visible = Boolean value that indicates if the recipe is in the player's recipe book
+- ~~visible = Boolean value that indicates if the recipe is in the player's recipe book~~
 
-ludo item:
+ludo item:s
 
 - ludo item id
 - etc

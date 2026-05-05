@@ -266,4 +266,22 @@ When a save is loaded, the maps should not load items that the player has taken.
 
 ### Enemy Loot Drops
 
-Random loot drops for enemy can be done with an array of item ids. With the built in function "randi(array.length())" I can get a random index from the item id array. 
+Random loot drops for enemy can be done with an array of item ids. With the built in function "randi(array.length())" I can get a random index from the item id array.
+
+## Scanning items to get reciepes
+
+what does the scanning mechanic need? 
+
+- An Area3D that can detect collisions with a object that can be scanned.
+
+- A way for in-game objects to be marked as available to scan. Maybe something that  utilizes the interactive component. Rather than using the default interactive input, it would need to utilize a scan CTA. 
+  
+  - The object would provide the scanner with a timer.
+  
+  - If the object leaves the scanner's Area3D, the timer resets.
+  
+  - If the object stays in the scanner's Area3D, the object provides an crafting recipe database id. 
+
+- A way for the scanning component to connect with database component. The database component has access to the crafting menu table. When an item is scanned, a new entry in the crafting menu is added. 
+
+- visual feed back that the scanner is scanning and that a scan was successful.
