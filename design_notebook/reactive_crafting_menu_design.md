@@ -274,13 +274,13 @@ what does the scanning mechanic need?
 
 - An Area3D that can detect collisions with a object that can be scanned.
 
-- A way for in-game objects to be marked as available to scan. Maybe something that  utilizes the interactive component. Rather than using the default interactive input, it would need to utilize a scan CTA. 
+- A way for in-game objects to be marked as available to scan. Maybe something that  utilizes the interactive component. Rather than using the default interactive input, it would need to utilize a scan CTA and input. ✨Maybe if an item can be scanned, when it enters the scanners Area3D the scanner checks if the item has an id or a scan_id✨:
   
-  - The object would provide the scanner with a timer.
+  - The object would provide the scanner with a timer. ✨Or maybe the object simple provides an crafting recipe id, and database component gets the info for how long the scanner's timer should take and what recipe should be joined with player's crafting menu.✨
   
   - If the object leaves the scanner's Area3D, the timer resets.
   
-  - If the object stays in the scanner's Area3D, the object provides an crafting recipe database id. 
+  - If the object stays in the scanner's Area3D for the duration of the timer, the scanner emits a signal that is connect to the scanner database component. The database component then adds the crafting recipe's id and the character's id to the crafting menu join table.  
 
 - A way for the scanning component to connect with database component. The database component has access to the crafting menu table. When an item is scanned, a new entry in the crafting menu is added. 
 

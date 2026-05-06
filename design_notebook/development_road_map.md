@@ -64,6 +64,8 @@ Done = I can: pick up and item; potential get a warning if the item over encumbe
 
 ## Crafting
 
+Dependencies: Inventory System
+
 Done = when I open the crafting menu, it shows me which recipes I have the ingredients to make; When I execute a recipe, I gain the recipe's output in character's inventory and the relevant ingredients are removed from the character's inventory.
 
 1. create a component that connects to the database component and creates crafting recipe and ingredient tables.
@@ -118,6 +120,8 @@ Done = when I open the crafting menu, it shows me which recipes I have the ingre
 
 ## Scanning and Adding Recipes (Schemes) to Crafting Recipes
 
+Dependencies: Crafting System, Inventory System, In Game Interaction System
+
 Done = I can tell when I can scan a specific item. I can scan the item, and when I do, a new recipe is added to my crafting recipe book.
 
 1. create a component that connects to the database component and specifically access the crafting recipe book table.
@@ -126,7 +130,7 @@ Done = I can tell when I can scan a specific item. I can scan the item, and when
 
 ## In Game Interactions
 
-Done = When I can press the interaction key, have a test interactive message appear, and
+Done = I can press the interaction key, and have a test interactive message appear.
 
 1. Create the player's input component:
    
