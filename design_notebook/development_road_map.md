@@ -158,7 +158,7 @@ Done = I can press the interaction key, and have a test interactive message appe
 
 3. Forward the input component's "interact_input" signal through the player component.
 
-4. The game component connects:
+4. The game component has a sub component that connects:
    
    1. the player component's "interact_input" with the interactive component's "character_entered" signal's product. This product is an "activate" method.
    

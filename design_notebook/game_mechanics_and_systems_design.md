@@ -285,3 +285,7 @@ what does the scanning mechanic need?
 - A way for the scanning component to connect with database component. The database component has access to the crafting menu table. When an item is scanned, a new entry in the crafting menu is added. 
 
 - visual feed back that the scanner is scanning and that a scan was successful.
+
+The above described behaviors may mean that I need to refactor the design of the in game interactions component. It needs to be a bit more flexible. So I need a way to define the component's CTA in such a way that the CTA can either be a text message that appears over the interactive item, a text message that appears on the character's HUD, or is some sort of VFX. I also need a way for the input to be flexible. 
+
+So as is, that is already part of the interactive component's design. As part of it's init method, I can define what the activate and deactivate functions do. If I want to change the input, I will need to give the game component a new sub-component that handles the connection to the player components input signal. 
