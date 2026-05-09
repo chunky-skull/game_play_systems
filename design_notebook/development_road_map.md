@@ -124,9 +124,30 @@ Dependencies: Crafting System, Inventory System, In Game Interaction System
 
 Done = I can tell when I can scan a specific item. I can scan the item, and when I do, a new recipe is added to my crafting recipe book.
 
-1. create a component that connects to the database component and specifically access the crafting recipe book table.
+- An Area3D that can detect collisions with a object that can be scanned.
+
+- A way for in-game objects to be marked as available to scan. Maybe something that utilizes the interactive component. Rather than using the default interactive input, it would need to utilize a scan CTA and input. ✨Maybe if an item can be scanned, when it enters the scanners Area3D the scanner checks if the item has an id or a scan_id✨:
+  
+  - The object would provide the scanner with a timer. ✨Or maybe the object simple provides an crafting recipe id, and database component gets the info for how long the scanner's timer should take and what recipe should be joined with player's crafting menu.✨
+  
+  - If the object leaves the scanner's Area3D, the timer resets.
+  
+  - If the object stays in the scanner's Area3D for the duration of the timer, the scanner emits a signal that is connect to the scanner database component. The database component then adds the crafting recipe's id and the character's id to the crafting menu join table.
+
+- A way for the scanning component to connect with database component. The database component has access to the crafting menu table. When an item is scanned, a new entry in the crafting menu is added.
+
+- visual feed back that the scanner is scanning and that a scan was successful.
+
+
+
+1. create a component that connects to the database component and specifically accesses the crafting recipe book table.
 2. create a scanner component:
-   1. 
+   1. Give it an Area3D or CollisionShape3D child node.
+   2. Give it a timer.
+3. Create a scan-able in game object:
+   1. Give it an in-game-interaction sub-component:
+      1. Set up activate, deactivate, and CTA for a scan-able item.
+      2. Set up the activate function to return a crafting recipe id and a scan_time init variable.
 
 ## In Game Interactions
 
