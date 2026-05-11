@@ -120,7 +120,7 @@ Done = when I open the crafting menu, it shows me which recipes I have the ingre
 
 ## Scanning and Adding Recipes (Schemes) to Crafting Recipes
 
-Dependencies: Crafting System, Inventory System, In Game Interaction System
+Dependencies: Crafting System, Inventory System, In Game Interaction System, Input Capture System
 
 Done = I can tell when I can scan a specific item. I can scan the item, and when I do, a new recipe is added to my crafting recipe book.
 
@@ -137,17 +137,19 @@ Done = I can tell when I can scan a specific item. I can scan the item, and when
 - A way for the scanning component to connect with database component. The database component has access to the crafting menu table. When an item is scanned, a new entry in the crafting menu is added.
 
 - visual feed back that the scanner is scanning and that a scan was successful.
-
-
-
 1. create a component that connects to the database component and specifically accesses the crafting recipe book table.
-2. create a scanner component:
+2. Add "scan_input" to the input component:
+   1. check if captured input is the scan input.
+   2. Emit "scan_input" signal
+3. create a scanner component:
    1. Give it an Area3D or CollisionShape3D child node.
    2. Give it a timer.
-3. Create a scan-able in game object:
+4. Create a scan-able in game object:
    1. Give it an in-game-interaction sub-component:
       1. Set up activate, deactivate, and CTA for a scan-able item.
       2. Set up the activate function to return a crafting recipe id and a scan_time init variable.
+5. Create a scan component at the game level that connects the body_entered/exited signals to player's scan component and the input capture component's scan_input signal:
+   1. on body_entered, connect the activate lambda to input component's "scan_input" signal. A function that takes the "body_entered" signals activate lambda as an argument and calls the lambda in its body, as well as setting the scan component's timer time and give it the scan-able item's crafting recipe id. Call this function when the "scan_input" signal is emitted.
 
 ## In Game Interactions
 
