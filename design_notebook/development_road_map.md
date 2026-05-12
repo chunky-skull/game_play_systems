@@ -1,5 +1,7 @@
 # Development Road Map
 
+This project implements the Mediator Pattern.
+
 Rather than start with character movement or level building, I could test out must of the systems described above with 2D menus.
 
 How?
@@ -149,7 +151,12 @@ Done = I can tell when I can scan a specific item. I can scan the item, and when
       1. Set up activate, deactivate, and CTA for a scan-able item.
       2. Set up the activate function to return a crafting recipe id and a scan_time init variable.
 5. Create a scan component at the game level that connects the body_entered/exited signals to player's scan component and the input capture component's scan_input signal:
-   1. on body_entered, connect the activate lambda to input component's "scan_input" signal. A function that takes the "body_entered" signals activate lambda as an argument and calls the lambda in its body, as well as setting the scan component's timer time and give it the scan-able item's crafting recipe id. Call this function when the "scan_input" signal is emitted.
+   1. on body_entered, connect the activate lambda to input component's "scan_input" signal. 
+      1. A function that takes the "body_entered" signals activate lambda as an argument and adds a call to that lambda in a new lambda that it returns.
+      2. this new lambda also sets the scan component's timer time and returns the scan-able item's crafting recipe id. 
+      3. Call this function when the "scan_input" signal is emitted.
+   2. on body_exited:
+   3. 
 
 ## In Game Interactions
 
