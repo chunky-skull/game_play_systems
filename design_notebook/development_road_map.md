@@ -139,24 +139,27 @@ Done = I can tell when I can scan a specific item. I can scan the item, and when
 - A way for the scanning component to connect with database component. The database component has access to the crafting menu table. When an item is scanned, a new entry in the crafting menu is added.
 
 - visual feed back that the scanner is scanning and that a scan was successful.
-1. create a component that connects to the database component and specifically accesses the crafting recipe book table.
+1. create a component that connects to the database component and specifically accesses the crafting recipe book and the crafting menu tables.
 2. Add "scan_input" to the input component:
    1. check if captured input is the scan input.
    2. Emit "scan_input" signal
 3. create a scanner component:
    1. Give it an Area3D or CollisionShape3D child node.
-   2. Give it a timer.
+   2. Give it a timer child node.
+   3. Give it a "scan_complete" signal that returns the crafting recipe id of the item scanned.
+   4. Connect the scanner component to the timer's "timeout" signal with a function that:
+      1. Emits the "scan_complete" signal.
 4. Create a scan-able in game object:
    1. Give it an in-game-interaction sub-component:
       1. Set up activate, deactivate, and CTA for a scan-able item.
       2. Set up the activate function to return a crafting recipe id and a scan_time init variable.
-5. Create a scan component at the game level that connects the body_entered/exited signals to player's scan component and the input capture component's scan_input signal:
-   1. on body_entered, connect the activate lambda to input component's "scan_input" signal. 
+5. Create a scan component at the game level that has access to the player's scan component, input capture component, and the database component:
+   1. on the scan components body_entered:
       1. A function that takes the "body_entered" signals activate lambda as an argument and adds a call to that lambda in a new lambda that it returns.
-      2. this new lambda also sets the scan component's timer time and returns the scan-able item's crafting recipe id. 
-      3. Call this function when the "scan_input" signal is emitted.
-   2. on body_exited:
-   3. 
+      2. this new lambda also sets the scan component's timer time, starts the scan component's timer, and returns the scan-able item's crafting recipe id. 
+      3. Call this function when the "scan_input" signal is emitted. This function connects the lambda it creates to the input component's "scan_input" signal.
+   2. on the scan components body_exited:
+   3. On the scan component's "scan_complete" signal, take the character's id and the crafting recipe id give them to the database component to create a new entry in the crafting menu table.
 
 ## In Game Interactions
 
