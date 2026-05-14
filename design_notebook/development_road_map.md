@@ -126,19 +126,6 @@ Dependencies: Crafting System, Inventory System, In Game Interaction System, Inp
 
 Done = I can tell when I can scan a specific item. I can scan the item, and when I do, a new recipe is added to my crafting recipe book.
 
-- An Area3D that can detect collisions with a object that can be scanned.
-
-- A way for in-game objects to be marked as available to scan. Maybe something that utilizes the interactive component. Rather than using the default interactive input, it would need to utilize a scan CTA and input. ✨Maybe if an item can be scanned, when it enters the scanners Area3D the scanner checks if the item has an id or a scan_id✨:
-  
-  - The object would provide the scanner with a timer. ✨Or maybe the object simple provides an crafting recipe id, and database component gets the info for how long the scanner's timer should take and what recipe should be joined with player's crafting menu.✨
-  
-  - If the object leaves the scanner's Area3D, the timer resets.
-  
-  - If the object stays in the scanner's Area3D for the duration of the timer, the scanner emits a signal that is connect to the scanner database component. The database component then adds the crafting recipe's id and the character's id to the crafting menu join table.
-
-- A way for the scanning component to connect with database component. The database component has access to the crafting menu table. When an item is scanned, a new entry in the crafting menu is added.
-
-- visual feed back that the scanner is scanning and that a scan was successful.
 1. create a component that connects to the database component and specifically accesses the crafting recipe book and the crafting menu tables.
 2. Add "scan_input" to the input component:
    1. check if captured input is the scan input.
@@ -147,7 +134,8 @@ Done = I can tell when I can scan a specific item. I can scan the item, and when
    1. Give it an Area3D or CollisionShape3D child node.
    2. Give it a timer child node.
    3. Give it a "scan_complete" signal that returns the crafting recipe id of the item scanned.
-   4. Connect the scanner component to the timer's "timeout" signal with a function that:
+   4. Give it a function that displays a scan complete message and emits the "scan_complete" signal.
+   5. Connect the scanner component to the timer's "timeout" signal with a function that:
       1. Emits the "scan_complete" signal.
 4. Create a scan-able in game object:
    1. Give it an in-game-interaction sub-component:
@@ -159,7 +147,14 @@ Done = I can tell when I can scan a specific item. I can scan the item, and when
       2. this new lambda also sets the scan component's timer time, starts the scan component's timer, and returns the scan-able item's crafting recipe id. 
       3. Call this function when the "scan_input" signal is emitted. This function connects the lambda it creates to the input component's "scan_input" signal.
    2. on the scan components body_exited:
-   3. On the scan component's "scan_complete" signal, take the character's id and the crafting recipe id give them to the database component to create a new entry in the crafting menu table.
+      1. Set the "scanning" lambda to a lambda that does nothing.
+   3. On the scan component's "scan_complete" signal, take the character's id and the crafting recipe id and  give them to the database component to create a new entry in the crafting menu table.
+6. Create a UI to test this functionality:
+   1. Simulate a scan-able item:
+      1. Give it an init "crafting_recipe_id" property with a test crafting recipe's id
+      2. Give it an init "scan_time" property
+      3. Attach the scan-able in game object to this UI
+   2. Simulate the character and their scanner:
 
 ## In Game Interactions
 
