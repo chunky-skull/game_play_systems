@@ -139,13 +139,13 @@ Done = I can tell when I can scan a specific item. I can scan the item, and when
       1. Emits the "scan_complete" signal.
 4. Create a scan-able in game object:
    1. Give it an in-game-interaction sub-component:
-      1. Set up activate, deactivate, and CTA for a scan-able item.
-      2. Set up the activate function to return a crafting recipe id and a scan_time init variable.
+      1. Set up activate, deactivate, and CTA for a scan-able item:
+         1. The activate function returns an array with the crafting recipe id and the scan_time init variable.
 5. Create a scan component at the game level that has access to the player's scan component, input capture component, and the database component:
    1. on the scan components body_entered:
       1. A function that takes the "body_entered" signals activate lambda as an argument and adds a call to that lambda in a new lambda that it returns.
-      2. this new lambda also sets the scan component's timer time, starts the scan component's timer, and returns the scan-able item's crafting recipe id. 
-      3. Call this function when the "scan_input" signal is emitted. This function connects the lambda it creates to the input component's "scan_input" signal.
+      2. this new lambda also sets the scan component's timer time, starts the scan component's timer, sets the scan-able item's activate function to a blank lambda, and returns the scan-able item's crafting recipe id. 
+      3. Call this function when the "scan_input" signal is emitted. This function connects the lambda it creates to the scan component's "scan_complete" signal.
    2. on the scan components body_exited:
       1. Set the "scanning" lambda to a lambda that does nothing.
    3. On the scan component's "scan_complete" signal, take the character's id and the crafting recipe id and  give them to the database component to create a new entry in the crafting menu table.
@@ -155,6 +155,13 @@ Done = I can tell when I can scan a specific item. I can scan the item, and when
       2. Give it an init "scan_time" property
       3. Attach the scan-able in game object to this UI
    2. Simulate the character and their scanner:
+      1. Give the scan area a visible element. A BoxContainer should work
+      2. Give character a BoxContainer.
+      3. Show and hide the scan area when scan_input is pressed. 
+      4. The scan area needs to able to pivot around the simulated character.
+   3. Show a "Scan Successful" message when the scan component's timer finishes:
+      1. If the scan area leaves the scan-able item, interrupt the scanner's timer with out showing the message. ALso set the scanner's timer to zero.
+      2. ✨Do not allow the scanner to scan the same item twice✨
 
 ## In Game Interactions
 
@@ -207,6 +214,8 @@ Done = I can press the interaction key, and have a test interactive message appe
 
 ## Dialogue
 
+Dependencies: In Game Interaction System, Input Capture System
+
 Done = I can navigate a dialogue tree by selecting from multiple answers. Reaching certain points in the tree and selecting a specific answer adds an item to the character's inventory. 
 
 1. Create a component that connect to the database component that creates the dialogue tree table and NPC table.
@@ -250,5 +259,21 @@ Done =
 Done =
 
 ## Opening Locked Doors
+
+Done =
+
+## Level/Map
+
+Done =
+
+### Flora
+
+Done =
+
+### Item/Loot Placement
+
+Done =
+
+### Entity Placement
 
 Done =

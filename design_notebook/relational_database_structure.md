@@ -57,7 +57,7 @@ NPC:
 
 ~~What about making a quest or item have a dialogue node id field. When a dialogue node is activated, a bit code checks makes a request to the database component to check if the quest or reward item tables have an entry that has a matching dialogue node id. Better, but I don't like that the code would need to make a database request for each dialogue option selected. Maybe I can flip this so that the dialogue node has an item and quest id. The code checks these fields and if they are not null, makes a request to the database component to get the corresponding entry.~~ 
 
-✨The dialogue tree table would not keep track of which NPC gives quest or items. Instead that would be a special kind of NPC. Something like a join table that has an NPC's id, the quest's id, and potential and item's id.✨
+✨The dialogue tree table would not keep track of which NPC gives quest or items. Instead that would be a special kind of NPC. Something like a join table that has an NPC's id, the quest's id, the dialogue node id, and potential item's id.✨
 
 Maybe I should make a this tree a specific datatype in game. Like a Doubly Linked List, or even a node tree. 
 
