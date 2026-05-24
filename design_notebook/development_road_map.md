@@ -22,6 +22,10 @@ Done =
 
 4. Instantiate the player component as a child of the game component scene.
 
+## Database access
+
+Done =
+
 ## Inventory
 
 Done = I can: pick up and item; potential get a warning if the item over encumbers the character; add that item to the character's inventory; open the character's inventory menu; "use," "equip," and drop an item from the inventory; And save and load the inventory's data.
@@ -144,11 +148,12 @@ Done = I can tell when I can scan a specific item. I can scan the item, and when
 5. Create a scan component at the game level that has access to the player's scan component, input capture component, and the database component:
    1. on the scan components body_entered:
       1. A function that takes the "body_entered" signals activate lambda as an argument and adds a call to that lambda in a new lambda that it returns.
-      2. this new lambda also sets the scan component's timer time, starts the scan component's timer, sets the scan-able item's activate function to a blank lambda, and returns the scan-able item's crafting recipe id. 
+      2. this new lambda also sets the scan component's timer time, starts the scan component's timer, sets the scan-able item's in-game-interaction component's activate function to a blank lambda, and returns the scan-able item's crafting recipe id. 
       3. Call this function when the "scan_input" signal is emitted. This function connects the lambda it creates to the scan component's "scan_complete" signal.
    2. on the scan components body_exited:
       1. Set the "scanning" lambda to a lambda that does nothing.
-   3. On the scan component's "scan_complete" signal, take the character's id and the crafting recipe id and  give them to the database component to create a new entry in the crafting menu table.
+      2. Set the scan component's timer to zero.
+   3. Connect the player's scan component's "scan_complete" signal to database component's "create_entry" function and provide it arguments for adding an entry in the crafting menu table. 
 6. Create a UI to test this functionality:
    1. Simulate a scan-able item:
       1. Give it an init "crafting_recipe_id" property with a test crafting recipe's id
@@ -248,7 +253,7 @@ Done = I can navigate a dialogue tree by selecting from multiple answers. Reachi
 
 ## Quests/Missions
 
-Done =
+Done = 
 
 ## Bestiary
 
