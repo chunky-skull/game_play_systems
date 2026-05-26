@@ -264,6 +264,13 @@ In "Lunacid," everything only drops or has one item. Loot chest are diegetic and
 
 When a save is loaded, the maps should not load items that the player has taken. Maybe a map's state has a linked list of all the items on the it. When the player picks an item up, that item is removed from the map's list. When the map state gets serialized for a save, its data does not include the taken item. A map item's state could be called something like "item_spawn_point." It would include a reference to the item, most likely an ID, and the item's location on the map. During game play each on map item's data, aside from enemy drops as they do not persist, will be stored in a node in the linked list mention earlier.✨
 
+"To achieve persistence of items in Godot levels,
+ you can use a singleton to store the state of items and tag them with a
+ specific group (like "persist") to manage which items retain their 
+state when revisiting scenes. This allows you to save and restore the 
+properties of these items as the player navigates between different 
+levels."
+
 ### Enemy Loot Drops
 
 Random loot drops for enemy can be done with an array of item ids. With the built in function "randi(array.length())" I can get a random index from the item id array.

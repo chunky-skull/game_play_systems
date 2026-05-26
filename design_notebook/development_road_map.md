@@ -273,12 +273,20 @@ Done =
 
 ### Flora
 
-Done =
+Done = Moving through the map feels like exploring an actual place. The environment feels verdant, lush, and living without compromising the game's performance.  
 
 ### Item/Loot Placement
 
-Done =
+Done = There always seems like there is something to find when exploring. If I leave an item if position in the level persists through loads. Once I take the item, it will no longer be were I picked it up, even after reloading the map.
+
+
 
 ### Entity Placement
+
+Done =
+
+### Expository Notes
+
+Dependencies: Item/Loot Placement System
 
 Done =
