@@ -271,6 +271,18 @@ state when revisiting scenes. This allows you to save and restore the
 properties of these items as the player navigates between different 
 levels."
 
+Some sort or relationship in the database. Like a many to many. For one map there are many items/loot, and most items are available on multiple maps. As part of the map's loading script, the "map_item" table and  spawns in items based on the entry's data. When the player removes an item from the map, somewhere a script runs to remove that entry from the "map_item" table. 
+
+map_item:
+
+- map_id
+
+- position 
+
+- rotation?
+
+- item_id
+
 ### Enemy Loot Drops
 
 Random loot drops for enemy can be done with an array of item ids. With the built in function "randi(array.length())" I can get a random index from the item id array.

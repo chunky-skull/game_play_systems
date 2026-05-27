@@ -279,7 +279,17 @@ Done = Moving through the map feels like exploring an actual place. The environm
 
 Done = There always seems like there is something to find when exploring. If I leave an item if position in the level persists through loads. Once I take the item, it will no longer be were I picked it up, even after reloading the map.
 
+Some sort or relationship in the database. Like a many to many. For one map there are many items/loot, and most items are available on multiple maps. As part of the map's loading script, the "map_item" table and spawns in items based on the entry's data. When the player removes an item from the map, somewhere a script runs to remove that entry from the "map_item" table.
 
+map_item:
+
+- map_id
+
+- position
+
+- rotation?
+
+- item_id
 
 ### Entity Placement
 

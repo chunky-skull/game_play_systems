@@ -109,3 +109,25 @@ ingredient: A join table that connects ingredients with recipes
 - ludo item id
 
 - recipe id
+
+## Persistent map/level items
+
+item:
+
+- id
+
+map:
+
+- id
+
+map_item:
+
+- id
+
+- map_id
+
+- position
+
+- rotation?
+
+- item_id
