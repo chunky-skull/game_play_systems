@@ -281,7 +281,7 @@ The map component or one of its child components, doors component most like, the
 
 Done =
 
-The helper component can also check if the added key is a specific key and send "specific_key_available" signals. This signals provides an door id. Specific keys can not be dropped. The component does not keep a count of specific keys available, and there is not "specific_key_unavailable" signal.
+The helper component can also check if the added key is a specific key and sends "specific_key_available" signals. This signals provides a door id. Specific keys can not be dropped. The component does not keep a count of specific keys available, and there is not "specific_key_unavailable" signal.
 
 ## Level/Map
 

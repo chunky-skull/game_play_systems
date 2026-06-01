@@ -236,13 +236,13 @@ I could also do something similar to crafting ingredients. There would be a help
 
 The map component or one of its child components, doors component most like, then sends something like an "unlock-able" signal to all the doors that unlock with generic keys on "generic_key_available." On "generic_key_unavailable," the doors component emits something like "locked." When the player opens a generic or specific door, in it's "unlock-able" state, the door's script disconnects from the doors component's "unlock-able" and "lock" signals. 
 
-The helper component can also check if the added key is a specific key and send "specific_key_available" signals. This signals provides an door id. Specific keys can not be dropped. The component does not keep a count of specific keys available, and there is not "specific_key_unavailable" signal. 
+The helper component can also check if the added key is a specific key and sends "specific_key_available" signals. This signals provides a door id. Specific keys can not be dropped. The component does not keep a count of specific keys available, and there is not "specific_key_unavailable" signal. 
 
 This pattern adds a conditional to the inventory's "item_added/removed" signals. This pattern also works for locked loot chest.
 
-How does the map save which generic and specific doors have been unlocked? Do doors have a table in the database? They could have a "locked" Boolean field. And a "map_id" field. In game doors are connected to the database doors by the database doors' id.
+~~How does the map save which generic and specific doors have been unlocked? Do doors have a table in the database? They could have a "locked" Boolean field. And a "map_id" field. In game doors are connected to the database doors by the database doors' id.~~
 
-Or this might be a better case for Godot's custom resources. Locked doors could be a custom resource that have a Boolean property called "locked," and another called "can_unlock." The code for unlocking a door is only ever run once, when the player ✨unlocks✨ the door. Maybe in unlocking the door, the door's script some how turns the door from '' one that needs a key to open, to a door that can just be open.
+Or this might be a ✨better case for Godot's custom resources✨. Locked doors could be a custom resource that have a Boolean property called "locked," and another called "can_unlock." The code for unlocking a door is only ever run once, when the player ✨unlocks✨ the door. Maybe in unlocking the door, the door's script some how turns the door from '' one that needs a key to open, to a door that can just be open.
 
 How? Maybe I can add an "open" property that holds a lambda. For locked doors, this function checks the "unlock-able" Boolean property. If so, the/a key is removed from inventory, "open" is set to a new function that opens the door, a "door_opened" signal is emitted, and "open" is called. Else, "locked" method is called. The lock method may emit a "locked" signal.
 
