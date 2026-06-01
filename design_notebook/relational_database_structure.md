@@ -131,3 +131,21 @@ map_item:
 - rotation?
 
 - item_id
+
+## Lock
+
+The "Door" to the name is implied. This way I can use this table to cover other lock-able things, like a chest.
+
+How does the map save which generic and specific doors have been unlocked? Do doors have a table in the database? They could have a "locked" Boolean field. And a "map_id" field. In game doors are connected to the database doors by the database doors' id.
+
+Or this might be a better case for Godot's custom resources. Locked doors could be a custom resource that have a Boolean property called "locked," and another called "can_unlock." The code for unlocking a door is only ever run once, when the player ✨unlocks✨ the door. Maybe in unlocking the door, the door's script some how turns the door from '' one that needs a key to open, to a door that can just be open.
+
+specific_key_lock:
+
+- id
+
+- set =  Boolean to represent the if the lock is locked.
+
+- can_unlock = Boolean to represent the if the player can unlock this lock.
+
+- map_id

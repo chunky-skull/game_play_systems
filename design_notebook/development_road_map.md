@@ -263,13 +263,29 @@ Done =
 
 Done =
 
-## Opening Locked Doors
+## Doors and Locks
+
+Dependencies: In Game Interactions System
 
 Done =
+
+### Generic Key Locks
+
+Done = 
+
+I could also do something similar to crafting ingredients. There would be a helper or "glue" component that connects to the inventory's "item_added/removed" signals. This component checks if the item is a key. If so, it emits "generic_key_available" signal, and increments a generic_key_count variable. On "item_removed," The component checks if the item is a generic key and decrements the generic_key_count if so. If that variable equals zero, the component emits a "generic_key_unavailable" signal.
+
+The map component or one of its child components, doors component most like, then sends something like an "unlock-able" signal to all the doors that unlock with generic keys on "generic_key_available." On "generic_key_unavailable," the doors component emits something like "locked." When the player opens a generic or specific door, in it's "unlock-able" state, the door's script disconnects from the doors component's "unlock-able" and "lock" signals.
+
+### Specific Key Locks
+
+Done =
+
+The helper component can also check if the added key is a specific key and send "specific_key_available" signals. This signals provides an door id. Specific keys can not be dropped. The component does not keep a count of specific keys available, and there is not "specific_key_unavailable" signal.
 
 ## Level/Map
 
-Done =
+Done = 
 
 ### Flora
 
@@ -280,16 +296,6 @@ Done = Moving through the map feels like exploring an actual place. The environm
 Done = There always seems like there is something to find when exploring. If I leave an item if position in the level persists through loads. Once I take the item, it will no longer be were I picked it up, even after reloading the map.
 
 Some sort or relationship in the database. Like a many to many. For one map there are many items/loot, and most items are available on multiple maps. As part of the map's loading script, the "map_item" table and spawns in items based on the entry's data. When the player removes an item from the map, somewhere a script runs to remove that entry from the "map_item" table.
-
-map_item:
-
-- map_id
-
-- position
-
-- rotation?
-
-- item_id
 
 ### Entity Placement
 
