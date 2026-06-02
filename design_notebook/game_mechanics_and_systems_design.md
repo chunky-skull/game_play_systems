@@ -242,7 +242,7 @@ This pattern adds a conditional to the inventory's "item_added/removed" signals.
 
 ~~How does the map save which generic and specific doors have been unlocked? Do doors have a table in the database? They could have a "locked" Boolean field. And a "map_id" field. In game doors are connected to the database doors by the database doors' id.~~
 
-Or this might be a ✨better case for Godot's custom resources✨. Locked doors could be a custom resource that have a Boolean property called "locked," and another called "can_unlock." The code for unlocking a door is only ever run once, when the player ✨unlocks✨ the door. Maybe in unlocking the door, the door's script some how turns the door from '' one that needs a key to open, to a door that can just be open.
+Or this might be a ✨better case for Godot's custom resources✨. Locked doors could be a custom resource that have a Boolean property called "locked," and another called "can_unlock." The code for unlocking a door is only ever run once, when the player ✨unlocks✨ the door. Maybe in unlocking the door, the door's script some how turns the door from one that needs a key to open, to a door that can just be open.
 
 How? Maybe I can add an "open" property that holds a lambda. For locked doors, this function checks the "unlock-able" Boolean property. If so, the/a key is removed from inventory, "open" is set to a new function that opens the door, a "door_opened" signal is emitted, and "open" is called. Else, "locked" method is called. The lock method may emit a "locked" signal.
 

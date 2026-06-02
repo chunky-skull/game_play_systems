@@ -20,7 +20,11 @@ Done =
 
 3. Create a game component that is its own scene
 
-4. Instantiate the player component as a child of the game component scene.
+4. Create a map component that is its own scene
+
+5. Instantiate the map component as a child of the game component scene.
+
+6. Instantiate the player component as a child of the map component scene.
 
 ## Database access
 
@@ -265,21 +269,41 @@ Done =
 
 ## Doors and Locks
 
-Dependencies: In Game Interactions System
+Dependencies: In Game Interactions System, Inventory System
 
-Done =
+Done = I use up a key when unlock a door. Doors stay unlocked. 
 
 ### Generic Key Locks
 
-Done = 
-
-I could also do something similar to crafting ingredients. There would be a helper or "glue" component that connects to the inventory's "item_added/removed" signals. This component checks if the item is a key. If so, it emits "generic_key_available" signal, and increments a generic_key_count variable. On "item_removed," The component checks if the item is a generic key and decrements the generic_key_count if so. If that variable equals zero, the component emits a "generic_key_unavailable" signal.
+Done = I use up a generic, unnamed key when unlock a door. Such doors stay unlocked.
 
 The map component or one of its child components, doors component most like, then sends something like an "unlock-able" signal to all the doors that unlock with generic keys on "generic_key_available." On "generic_key_unavailable," the doors component emits something like "locked." When the player opens a generic or specific door, in it's "unlock-able" state, the door's script disconnects from the doors component's "unlock-able" and "lock" signals.
 
+1. Create a lock mediator component at the Game level that connects to the character's inventory:
+   
+   1. Give it a "generic_key_count" int variable
+   
+   2. Connect to the "item_added/removed" signals:
+      
+      1. increment the "generic_key_count"  if the item is a generic key on "item_added."
+      
+      2. decrement, without going less than zero, the "generic_key_count" if the item is a generic key on "item_removed."
+   
+   3. When "generic_key_count" equals more than zero, emit "generic_key_available."
+   
+   4. When "generic_key_count" reaches zero, emit "generic_key_unavailable."
+   
+   5. Connect all generic locks to the "generic_key_un/available" signals, via the generic_lock group.
+
+2. Create a lock component at the Map level:
+   
+   1. Give it an "unlock-able" Boolean variable. 
+
 ### Specific Key Locks
 
-Done =
+Dependencies: Generic Key Lock System
+
+Done = I use up a specific, named key when unlock a door. Such doors stay unlocked.
 
 The helper component can also check if the added key is a specific key and sends "specific_key_available" signals. This signals provides a door id. Specific keys can not be dropped. The component does not keep a count of specific keys available, and there is not "specific_key_unavailable" signal.
 
